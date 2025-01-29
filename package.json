@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@nestjs/mongoose": "^11.0.0",
+    "@nestjs/swagger": "^11.0.3",
+    "class-validator": "^0.14.1",
+    "mongoose": "^8.9.5"
+  }
+}
