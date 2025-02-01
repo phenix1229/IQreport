@@ -1,35 +1,67 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsArray, IsString, IsPhoneNumber, IsEnum } from "class-validator"
+import { IsNotEmpty, IsString, IsObject } from "class-validator"
 
 export class CreateReportDto {
+   @IsNotEmpty()
+   @IsString()
+    subjectName: string
+   
     @IsNotEmpty()
     @IsString()
-    openedBy: string;
-
-    @IsNotEmpty()
-    @IsString()
-    clientName: string;
-
-    @IsNotEmpty()
-    @IsPhoneNumber()
-    clientPhone: string;
-
-    @IsNotEmpty()
-    @IsPhoneNumber()
-    clientCell: string;
-
-    @IsNotEmpty()
-    @IsEmail()
-    clientEmail: string;
+    psycologistName: string
 
     @IsNotEmpty()
     @IsString()
-    clientLocation: string;
+    testDate: string
 
     @IsNotEmpty()
     @IsString()
-    description: string;
-    
-    @IsOptional()
-    @IsArray()
-    updateComments?: [Object];
+    birthDate: string
+
+    @IsNotEmpty()
+    @IsString()
+    testAge: string
+
+    @IsNotEmpty()
+    @IsString()
+    blockDesign: object
+
+    @IsNotEmpty()
+    @IsObject()
+    similarities: object
+
+    @IsNotEmpty()
+    @IsObject()
+    matrixReasoning: object
+
+    @IsNotEmpty()
+    @IsObject()
+    digitSpan: object
+
+    @IsNotEmpty()
+    @IsObject()
+    coding: object
+
+    @IsNotEmpty()
+    @IsObject()
+    vocabulary: object
+
+    @IsNotEmpty()
+    @IsObject()
+    figureWeights: object
+
+    @IsNotEmpty()
+    @IsObject()
+    visualPuzzles: object
+
+    @IsNotEmpty()
+    @IsObject()
+    pictureSpan: object
+
+    @IsNotEmpty()
+    @IsObject()
+    symbolSearch: object
+
+    @IsNotEmpty()
+    @IsObject()
+    scaledScoreToComposite: object
 }

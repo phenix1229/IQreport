@@ -3,33 +3,21 @@ import { IsEmail, IsNotEmpty, IsOptional, IsArray, IsString, IsPhoneNumber, IsEn
 export class CreatePsychologistDto {
     @IsNotEmpty()
     @IsString()
-    openedBy: string;
+    firstName: string
 
     @IsNotEmpty()
     @IsString()
-    clientName: string;
-
-    @IsNotEmpty()
-    @IsPhoneNumber()
-    clientPhone: string;
-
-    @IsNotEmpty()
-    @IsPhoneNumber()
-    clientCell: string;
-
-    @IsNotEmpty()
-    @IsEmail()
-    clientEmail: string;
+    lastName: string
 
     @IsNotEmpty()
     @IsString()
-    clientLocation: string;
+    email: String
 
     @IsNotEmpty()
     @IsString()
-    description: string;
-    
+    password: String
+
     @IsOptional()
     @IsArray()
-    updateComments?: [Object];
+    reports: String[]
 }

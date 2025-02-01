@@ -6,7 +6,7 @@ export type ReportDocument = HydratedDocument<Report>;
 @Schema()
 export class Report {
     @Prop()
-    childName: string
+    subjectName: string
 
     @Prop()
     psycologistName: string

@@ -11,5 +11,5 @@ export class CreateSubjectDto {
     
     @IsOptional()
     @IsArray()
-    reports?: [String];
+    reports?: String[];
 }
