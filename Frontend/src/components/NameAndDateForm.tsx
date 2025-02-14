@@ -10,7 +10,7 @@ const NameAndDateForm = () => {
     const [testDateMonth, setTestDateMonth] = useState('');
     const [testDateDay, setTestDateDay] = useState('');
     const [birthDateYear, setBirthDateYear] = useState('');
-    const [birthdateMonth, steBirthDateMonth] = useState('');
+    const [birthdateMonth, setBirthDateMonth] = useState('');
     const [birthDateDay, setBirthDateDay] = useState('');
     const [testAgeYear, setTestAgeYear] = useState('');
     const [testAgeMonth, setTestAgeMonth] = useState('');
@@ -35,6 +35,69 @@ const NameAndDateForm = () => {
         label="Psychologist name"
         value={psychologistName}
         onChange={(Event) => setPsychologistName(Event.target.value)}
+      />
+      <TextField
+        required
+        margin='normal'
+        id='testDateYear'
+        value={testDateYear}
+        onChange={(Event) => setTestDateYear(Event.target.value)}
+      />
+      <TextField
+        required
+        margin='normal'
+        id='testDateMonth'
+        value={testDateMonth}
+        onChange={(Event) => setTestDateMonth(Event.target.value)}
+      />
+      <TextField
+        required
+        margin='normal'
+        id='testDateDay'
+        value={testDateDay}
+        onChange={(Event) => setTestDateDay(Event.target.value)}
+      />
+      <TextField
+        required
+        margin='normal'
+        id='birthDateYear'
+        value={birthDateYear}
+        onChange={(Event) => setBirthDateYear(Event.target.value)}
+      />
+      <TextField
+        required
+        margin='normal'
+        id='birthdateMonth'
+        value={birthdateMonth}
+        onChange={(Event) => setBirthDateMonth(Event.target.value)}
+      />
+      <TextField
+        required
+        margin='normal'
+        id='birthDateDay'
+        value={birthDateDay}
+        onChange={(Event) => setBirthDateDay(Event.target.value)}
+      />
+      <TextField
+        required
+        margin='normal'
+        id='testAgeYear'
+        value={testAgeYear}
+        onChange={(Event) => setTestAgeYear(Event.target.value)}
+      />
+      <TextField
+        required
+        margin='normal'
+        id='testAgeMonth'
+        value={testAgeMonth}
+        onChange={(Event) => setTestAgeMonth(Event.target.value)}
+      />
+      <TextField
+        required
+        margin='normal'
+        id='testAgeDay'
+        value={testAgeDay}
+        onChange={(Event) => setTestAgeDay(Event.target.value)}
       />
       </FormGroup>
       </FormControl>
