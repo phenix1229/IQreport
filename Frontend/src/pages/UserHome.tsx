@@ -5,7 +5,7 @@ import { Container } from '@mui/material'
 // import { setAuth } from '../app/authSlice';
 // import '../interceptors/axios'
 // import { setUser } from '../app/userSlice';
-// import UserOptions from '../components/UserOptions';
+import UserOptions from '../components/UserOptions';
 
 const UserHome = () => {
 //   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const UserHome = () => {
 
   return (
     <Container>
-      {/* <UserOptions /> */}
+      <UserOptions />
     </Container>
   )
 }
