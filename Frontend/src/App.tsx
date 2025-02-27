@@ -4,6 +4,7 @@ import MainLayout from './layouts/MainLayout'
 import Index from './pages/Index'
 import Login from './pages/Login'
 import UserHome from './pages/UserHome'
+import ScorePage from './pages/ScorePage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -11,6 +12,7 @@ const router = createBrowserRouter(
         <Route index element={<Index />} />
         <Route path='/login' element={<Login />}/>
         <Route path='/userHome' element={<UserHome />}/>
+        <Route path='/scorePage' element={<ScorePage />}/>
       </Route>
   )
 )

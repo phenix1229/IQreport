@@ -51,146 +51,146 @@ if(redirect){
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='sumOfVerbalCompScores'
+        label="Verbal comprehension"
+        value={sumOfVerbalCompScores}
+        onChange={(Event) => setSumOfVerbalCompScores(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='vciCompositeScore'
+        label="VCI"
+        value={vciCompositeScore}
+        onChange={(Event) => setVciCompositeScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='vciPercentile'
+        // label="Block design"
+        value={vciPercentile}
+        onChange={(Event) => setVciPercentile(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='sumOfVisualSpacialScores'
+        label="Visual spacial"
+        value={sumOfVisualSpacialScores}
+        onChange={(Event) => setSumOfVisualSpacialScores(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='vsiCompositeScore'
+        label="VSI"
+        value={vsiCompositeScore}
+        onChange={(Event) => setVsiCompositeScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='vsiPercentile'
+        // label="Block design"
+        value={vsiPercentile}
+        onChange={(Event) => setVsiPercentile(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='sumOfFluidReasoningScores'
+        label="Fluid reasoning"
+        value={sumOfFluidReasoningScores}
+        onChange={(Event) => setSumOfFluidReasoningScores(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='friCompositeScore'
+        label="FRI"
+        value={friCompositeScore}
+        onChange={(Event) => setFriCompositeScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='friPercentile'
+        // label="Block"
+        value={friPercentile}
+        onChange={(Event) => setFriPercentile(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='sumOfWorkingMemoryScores'
+        label="Working memory"
+        value={sumOfWorkingMemoryScores}
+        onChange={(Event) => setSumOfWorkingMemoryScores(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='wmiCompositeScore'
+        label="WMI"
+        value={wmiCompositeScore}
+        onChange={(Event) => setWmiCompositeScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='wmiPercentile'
+        // label="Block design"
+        value={wmiPercentile}
+        onChange={(Event) => setWmiPercentile(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='sumOfProcessingSpeedScores'
+        label="Processing speed"
+        value={sumOfProcessingSpeedScores}
+        onChange={(Event) => setSumOfProcessingSpeedScores(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='psiCompositeScore'
+        label="PSI"
+        value={psiCompositeScore}
+        onChange={(Event) => setPsiCompositeScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='psiPercentile'
+        // label="Block design"
+        value={psiPercentile}
+        onChange={(Event) => setPsiPercentile(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='sumOfFullScaleScores'
+        label="Full scale"
+        value={sumOfFullScaleScores}
+        onChange={(Event) => setSumOfFullScaleScores(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='fsiqCompositeScore'
+        label="FSIQ"
+        value={fsiqCompositeScore}
+        onChange={(Event) => setFsiqCompositeScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='fsiqPercentile'
+        // label="Block design"
+        value={fsiqPercentile}
+        onChange={(Event) => setFsiqPercentile(Event.target.value)}
       />
       <Button variant="contained" onClick={(e)=>{submit(e)}}>Submit</Button>
       </FormGroup>
