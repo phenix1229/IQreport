@@ -1,7 +1,7 @@
-import {SyntheticEvent, useState} from 'react'
+import { SyntheticEvent, useState } from 'react'
 import { Button, Container, FormControl, FormGroup, TextField } from '@mui/material'
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 
 const NameAndDateForm = () => {
     const [subjectName, setSubjectName] = useState('');
@@ -16,9 +16,22 @@ const NameAndDateForm = () => {
     const [testAgeMonth, setTestAgeMonth] = useState('');
     const [testAgeDay, setTestAgeDay] = useState('');
 
+    const submit = async (e:SyntheticEvent) => {
+      e.preventDefault();
+      try{
+      const response:any = await axios.post('http://localhost:5000/api/users/login', {
+      //   email,
+      //   password
+      }, {withCredentials:true})
+      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+    } catch(error:any){
+      alert(error.response.data.message)
+    }
+  }
+
     return (
-        <Container>
-        <FormControl>
+      <Container>
+      <FormControl>
       <FormGroup>
       <TextField
         required
@@ -99,6 +112,7 @@ const NameAndDateForm = () => {
         value={testAgeDay}
         onChange={(Event) => setTestAgeDay(Event.target.value)}
       />
+      <Button variant="contained" onClick={(e)=>{submit(e)}}>Submit</Button>
       </FormGroup>
       </FormControl>
         </Container>

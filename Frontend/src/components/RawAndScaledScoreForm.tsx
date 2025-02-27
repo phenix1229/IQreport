@@ -53,7 +53,7 @@ if(redirect){
       <TextField
         required
         margin='normal'
-        id='blockDesign'
+        id='bdRawScore'
         label="Block design"
         value={bdRawScore}
         onChange={(Event) => setBdRawScore(Event.target.value)}
@@ -61,154 +61,144 @@ if(redirect){
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='bdScaledScore'
+        value={bdScaledScore}
+        onChange={(Event) => setBdScaledScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='siRawScore'
+        label="Similarities"
+        value={siRawScore}
+        onChange={(Event) => setSiRawScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='siScaledScore'
+        value={siScaledScore}
+        onChange={(Event) => setSiScaledScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='mrRawScore'
+        label="Matrix reasoning"
+        value={mrRawScore}
+        onChange={(Event) => setMrRawScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='mrScaledScore'
+        value={mrScaledScore}
+        onChange={(Event) => setMrScaledScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='dsRawScore'
+        label="Digit span"
+        value={dsRawScore}
+        onChange={(Event) => setDsRawScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='dsScaledScore'
+        value={dsScaledScore}
+        onChange={(Event) => setDsScaledScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='coRawScore'
+        label="Coding"
+        value={coRawScore}
+        onChange={(Event) => setCoRawScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='coScaledScore'
+        value={coScaledScore}
+        onChange={(Event) => setCoScaledScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='vcRawScore'
+        label="Vocabulary"
+        value={vcRawScore}
+        onChange={(Event) => setVcRawScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='vcScaledScore'
+        value={vcScaledScore}
+        onChange={(Event) => setVcScaledScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='fwRawScore'
+        label="Figure weights"
+        value={fwRawScore}
+        onChange={(Event) => setFwRawScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='fwScaledScore'
+        value={fwScaledScore}
+        onChange={(Event) => setFwScaledScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='vpRawScore'
+        label="Visual puzzles"
+        value={vpRawScore}
+        onChange={(Event) => setVpRawScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='vpScaledScore'
+        value={vpScaledScore}
+        onChange={(Event) => setVpScaledScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='psRawScore'
+        label="Picture span"
+        value={psRawScore}
+        onChange={(Event) => setPsRawScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='psScaledScore'
+        value={psScaledScore}
+        onChange={(Event) => setPsScaledScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='ssRawScore'
+        label="Symbol search"
+        value={ssRawScore}
+        onChange={(Event) => setSsRawScore(Event.target.value)}
       />
       <TextField
         required
         margin='normal'
-        id='blockDesign'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
+        id='ssScaledScore'
+        value={ssScaledScore}
+        onChange={(Event) => setSsScaleScore(Event.target.value)}
       />
       <Button variant="contained" onClick={(e)=>{submit(e)}}>Submit</Button>
       </FormGroup>
