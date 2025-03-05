@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PsychologistsModule } from './psychologists/psychologists.module';
 import { PsychologistSchema } from './schemas/psychologist.schema';
 import { PsychologistsService } from './psychologists/psychologists.service';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [PsychologistsModule.forRootAsync({
@@ -23,7 +24,8 @@ import { PsychologistsService } from './psychologists/psychologists.service';
   // }]),
   ConfigModule.forRoot({
     isGlobal: true
-  })
+  }),
+  ReportsModule
 
   ],
   controllers: [AppController],

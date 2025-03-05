@@ -33,8 +33,8 @@ export class PsychologistsController {
   }
 
   @Put(':email')
-  async update(@Res() res:express.Response, @Param('email') email:string, @Body() request:any){
-    const updatedPsychologist = await this.psychologistsService.update(email, request);
+  async update(@Res() res:express.Response, @Param('email') email:string, @Body() updatePsychologistDto:UpdatePsychologistDto){
+    const updatedPsychologist = await this.psychologistsService.update(email, updatePsychologistDto);
     if(!updatedPsychologist){
       throw new NotFoundException('Psychologist does not exist.');
     }
