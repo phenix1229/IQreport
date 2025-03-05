@@ -8,20 +8,25 @@ import { PsychologistsModule } from './psychologists/psychologists.module';
 import { PsychologistSchema } from './schemas/psychologist.schema';
 import { PsychologistsService } from './psychologists/psychologists.service';
 import { ReportsModule } from './reports/reports.module';
+import { ReportSchema } from './schemas/report.schema';
+import { ReportsService } from './reports/reports.service';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
-  imports: [PsychologistsModule.forRootAsync({
+  imports: [PsychologistsModule,
+    MongooseModule.forRootAsync({
     inject: [ConfigService], 
-    useFactory: async (configSecret: ConfigService) => ({
+    useFactory: async (configSecret:ConfigService ) => ({
       uri: configSecret.get("MONGO_URI")
     })
   }),
   MongooseModule.forFeature([{
     name: 'Psychologist', schema: PsychologistSchema
   }]),
-  // MongooseModule.forFeature([{
-  //   name: 'Ticket', schema: TicketSchema
-  // }]),
+  MongooseModule.forFeature([{
+    name: 'Report', schema: ReportSchema
+  }]),
   ConfigModule.forRoot({
     isGlobal: true
   }),
@@ -32,6 +37,7 @@ import { ReportsModule } from './reports/reports.module';
   providers: [
     AppService,
     PsychologistsService,
+    ReportsService,
     JwtService
   ],
 })

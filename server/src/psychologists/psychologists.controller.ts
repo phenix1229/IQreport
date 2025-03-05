@@ -13,7 +13,7 @@ export class PsychologistsController {
     const newPsychologist = this.psychologistsService.create(createPsychologistDto);
     return res.status(HttpStatus.OK).json({
       message: 'Psychologist created successfully.',
-      ticket: newPsychologist
+      psychologist: newPsychologist
     });
   }
 

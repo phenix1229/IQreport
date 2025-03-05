@@ -19,7 +19,7 @@ export class PsychologistsService {
   }
 
   async findOne(email: string) {
-    const ticket = await this.psychologistModel.findById({email});
+    const ticket = await this.psychologistModel.findOne({email});
     if(!ticket){
       throw new NotFoundException();
     }

@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ReportsService } from './reports.service';
 import { ReportsController } from './reports.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ReportSchema, ReportDocument } from 'src/schemas/report.schema';
+import { Report, ReportSchema } from 'src/schemas/report.schema';
 import { JwtModule } from '@nestjs/jwt';
 import * as dotenv from 'dotenv';
 import { ConfigService } from '@nestjs/config';
@@ -19,4 +19,8 @@ dotenv.config();
   controllers: [ReportsController],
   providers: [ReportsService],
 })
-export class ReportsModule {}
+export class ReportsModule {
+  static forRootAsync(arg0: { inject: ConfigService[]; useFactory: (configSecret: ConfigService) => Promise<{ uri: any; }>; }): import("@nestjs/common").Type<any> | import("@nestjs/common").DynamicModule | Promise<import("@nestjs/common").DynamicModule> | import("@nestjs/common").ForwardReference<any> {
+    throw new Error('Method not implemented.');
+  }
+}

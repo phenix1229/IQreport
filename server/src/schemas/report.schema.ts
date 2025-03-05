@@ -9,7 +9,7 @@ export class Report {
     subjectName: string
 
     @Prop()
-    psycologistName: string
+    psychologistName: string
 
     @Prop()
     testDate: string
@@ -20,37 +20,37 @@ export class Report {
     @Prop()
     testAge: string
 
-    @Prop()
+    @Prop({type:Object})
     blockDesign: object
 
-    @Prop()
+    @Prop({type:Object})
     similarities: object
 
-    @Prop()
+    @Prop({type:Object})
     matrixReasoning: object
 
-    @Prop()
+    @Prop({type:Object})
     digitSpan: object
 
-    @Prop()
+    @Prop({type:Object})
     coding: object
 
-    @Prop()
+    @Prop({type:Object})
     vocabulary: object
 
-    @Prop()
+    @Prop({type:Object})
     figureWeights: object
 
-    @Prop()
+    @Prop({type:Object})
     visualPuzzles: object
 
-    @Prop()
+    @Prop({type:Object})
     pictureSpan: object
 
-    @Prop()
+    @Prop({type:Object})
     symbolSearch: object
 
-    @Prop()
+    @Prop({type:Object})
     scaledScoreToComposite: object
 }
 

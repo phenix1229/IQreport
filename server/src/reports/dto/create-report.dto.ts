@@ -7,7 +7,7 @@ export class CreateReportDto {
    
     @IsNotEmpty()
     @IsString()
-    psycologistName: string
+    psychologistName: string
 
     @IsNotEmpty()
     @IsString()
@@ -22,7 +22,7 @@ export class CreateReportDto {
     testAge: string
 
     @IsNotEmpty()
-    @IsString()
+    @IsObject()
     blockDesign: object
 
     @IsNotEmpty()

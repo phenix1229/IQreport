@@ -19,7 +19,7 @@ export class ReportsService {
   }
 
   async findOne(id: string) {
-    const report = await this.reportModel.findById({id});
+    const report = await this.reportModel.findById({_id:id});
     if(!report){
       throw new NotFoundException();
     }
