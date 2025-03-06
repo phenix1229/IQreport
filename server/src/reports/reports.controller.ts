@@ -32,7 +32,7 @@ export class ReportsController {
     return res.status(HttpStatus.OK).json(report)
   }
 
-  @Put(':email')
+  @Put(':id')
   async update(@Res() res:express.Response, @Param('id') id:string, @Body() updateReportDto:UpdateReportDto){
     const updatedReport = await this.reportsService.update(id, updateReportDto);
     if(!updatedReport){

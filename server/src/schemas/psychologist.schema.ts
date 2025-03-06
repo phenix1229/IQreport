@@ -5,16 +5,16 @@ export type PsychologistDocument = HydratedDocument<Psychologist>;
 
 @Schema()
 export class Psychologist {
-    @Prop()
+    @Prop({required:true})
     firstName: string
 
-    @Prop()
+    @Prop({required:true})
     lastName: string
 
-    @Prop()
+    @Prop({required:true})
     email: String
 
-    @Prop()
+    @Prop({required:true})
     password: String
 
     @Prop([String])

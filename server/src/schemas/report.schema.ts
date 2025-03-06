@@ -5,52 +5,52 @@ export type ReportDocument = HydratedDocument<Report>;
 
 @Schema()
 export class Report {
-    @Prop()
+    @Prop({required:true})
     subjectName: string
 
-    @Prop()
+    @Prop({required:true})
     psychologistName: string
 
-    @Prop()
+    @Prop({required:true})
     testDate: string
 
-    @Prop()
+    @Prop({required:true})
     birthDate: string
 
-    @Prop()
+    @Prop({required:true})
     testAge: string
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     blockDesign: object
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     similarities: object
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     matrixReasoning: object
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     digitSpan: object
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     coding: object
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     vocabulary: object
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     figureWeights: object
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     visualPuzzles: object
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     pictureSpan: object
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     symbolSearch: object
 
-    @Prop({type:Object})
+    @Prop({type:Object, required:true})
     scaledScoreToComposite: object
 }
 

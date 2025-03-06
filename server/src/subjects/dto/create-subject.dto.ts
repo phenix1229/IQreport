@@ -1,15 +1,27 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsArray, IsString, IsPhoneNumber, IsEnum } from "class-validator";
+import { IsNotEmpty, IsString, IsArray, IsOptional } from "class-validator"
 
 export class CreateSubjectDto {
-    @IsNotEmpty()
-    @IsString()
-    firstName: string;
+   @IsNotEmpty()
+   @IsString()
+   firstName: string
+   
+   @IsNotEmpty()
+   @IsString()
+   lastName: string
+   
+   @IsNotEmpty()
+   @IsString()
+   birthMonth: string
 
-    @IsNotEmpty()
-    @IsString()
-    lastName: string;
-    
-    @IsOptional()
-    @IsArray()
-    reports?: String[];
+   @IsNotEmpty()
+   @IsString()
+   birthDay: string
+
+   @IsNotEmpty()
+   @IsString()
+   birthYear: string
+
+   @IsOptional()
+   @IsArray()
+   reports
 }

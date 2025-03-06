@@ -27,11 +27,11 @@ export class ReportsService {
   }
 
   async update(id: string, updateReportDto: UpdateReportDto) {
-    const report = await this.reportModel.findOne({id});
+    const report = await this.reportModel.findOne({_id:id});
     if(!report){
         throw new NotFoundException('Report does not exist.');
     }
-    const updatedReport = await this.reportModel.updateOne({id}, {$set: {...updateReportDto}});
+    const updatedReport = await this.reportModel.updateOne({_id:id}, {$set: {...updateReportDto}});
     return report;
   }
 }
