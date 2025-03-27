@@ -1,12 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, NotFoundException, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, NotFoundException, Put, UnauthorizedException, Req } from '@nestjs/common';
 import { PsychologistsService } from './psychologists.service';
 import { CreatePsychologistDto } from './dto/create-psychologist.dto';
 import { UpdatePsychologistDto } from './dto/update-psychologist.dto';
 import * as express from 'express';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('psychologists')
 export class PsychologistsController {
-  constructor(private readonly psychologistsService: PsychologistsService) {}
+  constructor(private readonly psychologistsService: PsychologistsService, private jwtService:JwtService, private configService: ConfigService) {}
 
   @Post()
   async create(@Res() res:express.Response, @Body() createPsychologistDto: CreatePsychologistDto) {
@@ -15,6 +17,17 @@ export class PsychologistsController {
       message: 'Psychologist created successfully.',
       psychologist: newPsychologist
     });
+  }
+
+  @Post('register')
+  async registerUser(@Res() res, @Body() createPsychologistDto: CreatePsychologistDto) {
+      const newPsychologist = await this.psychologistsService.register(createPsychologistDto);
+      if(newPsychologist){
+          return res.status(HttpStatus.OK).json({
+              message: 'Psychologist created successfully.'
+          });
+      }
+      return res.message
   }
 
   @Get('all')
@@ -43,4 +56,43 @@ export class PsychologistsController {
       psychologist: updatedPsychologist
     });
   }
+
+  @Post('login')
+    async login(@Res({passthrough: true}) res:express.Response, @Body('email') email:string, @Body('password') password:string){
+        const psychologist = await this.psychologistsService.login(email, password);
+        const accessToken = await this.jwtService.signAsync({
+            firstName: psychologist.firstName,
+            lastName: psychologist.lastName,
+            email: psychologist.email
+        }, {secret:this.configService.get("JWT_ACCESS_TOKEN_SECRET"),expiresIn: '10h'});
+        const refreshToken = await this.jwtService.signAsync({
+            firstName: psychologist.firstName,
+            lastName: psychologist.lastName,
+            email: psychologist.email
+        },{secret:this.configService.get("JWT_ACCESS_TOKEN_SECRET")});
+        res.status(200);
+        res.cookie('refreshToken', refreshToken,{
+            httpOnly: true,
+            maxAge: 7*24*60*60*1000
+        })
+        return {token:accessToken};
+    }
+
+    @Post('refresh')
+    async refresh(@Req() req:express.Request, @Res() res:express.Response){
+        try {
+            const refreshToken = req.cookies['refreshToken'];
+            const {email} = await this.jwtService.verifyAsync(refreshToken,{secret:this.configService.get("JWT_ACCESS_TOKEN_SECRET")});
+            const token = await this.jwtService.signAsync({email},{expiresIn:'30s'})
+            return res.status(HttpStatus.OK).json({token});
+        } catch(e) {
+            throw new UnauthorizedException;
+        }
+    }
+
+    @Post('logout')
+    async logout(@Res({passthrough:true}) res: express.Response){
+        res.clearCookie('refreshToken');
+        return {message:'success'}
+    }
 }
