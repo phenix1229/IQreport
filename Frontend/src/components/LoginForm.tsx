@@ -12,7 +12,7 @@ const LoginForm = () => {
   const submit = async (e:SyntheticEvent) => {
     e.preventDefault();
     try{
-    const response:any = await axios.post('http://localhost:5000/api/users/login', {
+    const response:any = await axios.post('http://localhost:5000/api/psychologists/login', {
       email,
       password
     }, {withCredentials:true})
