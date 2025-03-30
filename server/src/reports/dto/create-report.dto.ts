@@ -23,45 +23,45 @@ export class CreateReportDto {
 
     @IsNotEmpty()
     @IsObject()
-    blockDesign: object
+    blockDesign: object = {}
 
     @IsNotEmpty()
     @IsObject()
-    similarities: object
+    similarities: object = {}
 
     @IsNotEmpty()
     @IsObject()
-    matrixReasoning: object
+    matrixReasoning: object = {}
 
     @IsNotEmpty()
     @IsObject()
-    digitSpan: object
+    digitSpan: object = {}
 
     @IsNotEmpty()
     @IsObject()
-    coding: object
+    coding: object = {}
 
     @IsNotEmpty()
     @IsObject()
-    vocabulary: object
+    vocabulary: object = {}
 
     @IsNotEmpty()
     @IsObject()
-    figureWeights: object
+    figureWeights: object = {}
 
     @IsNotEmpty()
     @IsObject()
-    visualPuzzles: object
+    visualPuzzles: object = {}
 
     @IsNotEmpty()
     @IsObject()
-    pictureSpan: object
+    pictureSpan: object = {}
 
     @IsNotEmpty()
     @IsObject()
-    symbolSearch: object
+    symbolSearch: object = {}
 
     @IsNotEmpty()
     @IsObject()
-    scaledScoreToComposite: object
+    scaledScoreToComposite: object = {}
 }

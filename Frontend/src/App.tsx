@@ -5,6 +5,7 @@ import Index from './pages/Index'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import UserHome from './pages/UserHome'
+import NameAndDate from './pages/NameAndDate'
 import ScorePage from './pages/ScorePage'
 
 const router = createBrowserRouter(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
         <Route path='/login' element={<Login />}/>
         <Route path='/register' element={<Register />}/>
         <Route path='/userHome' element={<UserHome />}/>
+        <Route path='/nameAndDate' element={<NameAndDate />}/>
         <Route path='/scorePage' element={<ScorePage />}/>
       </Route>
   )

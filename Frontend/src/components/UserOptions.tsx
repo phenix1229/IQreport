@@ -13,11 +13,11 @@ const UserOptions = () => {
       <br/>
       <br/>
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+      <Link to='/nameAndDate'>
+        <Button variant='contained'>New report</Button>
+      </Link>
       <Link to="/ViewAllTickets">
         <Button variant='contained'>View reports</Button>
-      </Link>
-      <Link to='/CreateTicket'>
-        <Button variant='contained'>New report</Button>
       </Link>
       <Link to="/ViewAllUsers">
         <Button variant='contained'>View subjects</Button>
