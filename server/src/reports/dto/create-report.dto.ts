@@ -1,25 +1,33 @@
-import { IsNotEmpty, IsString, IsObject } from "class-validator"
+import { IsNotEmpty, IsString, IsObject, IsArray } from "class-validator"
 
 export class CreateReportDto {
    @IsNotEmpty()
    @IsString()
-    subjectName: string
+    subjectFirstName: string
+   
+    @IsNotEmpty()
+   @IsString()
+    subjectLastName: string
    
     @IsNotEmpty()
     @IsString()
-    psychologistName: string
-
+    psychologistFirstName: string
+    
     @IsNotEmpty()
     @IsString()
-    testDate: string
+    psychologistLastName: string
 
     @IsNotEmpty()
-    @IsString()
-    birthDate: string
+    @IsArray()
+    testDate: [number]
 
     @IsNotEmpty()
-    @IsString()
-    testAge: string
+    @IsArray()
+    birthDate: [number]
+
+    @IsNotEmpty()
+    @IsArray()
+    testAge: [number]
 
     @IsNotEmpty()
     @IsObject()

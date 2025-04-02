@@ -60,7 +60,6 @@ export class PsychologistsController {
   @Post('login')
     async login(@Res({passthrough: true}) res:express.Response, @Body('email') email:string, @Body('password') password:string){
         const psychologist = await this.psychologistsService.login(email, password);
-        console.log("secret" + this.configService.get("JWT_ACCESS_TOKEN_SECRET"))
         const accessToken = await this.jwtService.signAsync({
             firstName: psychologist.firstName,
             lastName: psychologist.lastName,

@@ -6,19 +6,25 @@ export type ReportDocument = HydratedDocument<Report>;
 @Schema()
 export class Report {
     @Prop({required:true})
-    subjectName: string
+    subjectFirstName: string
+    
+    @Prop({required:true})
+    subjectLastName: string
 
     @Prop({required:true})
-    psychologistName: string
-
+    psychologistFirstName: string
+    
     @Prop({required:true})
-    testDate: string
+    psychologistLastName: string
 
-    @Prop({required:true})
-    birthDate: string
+    @Prop({required:true, type:Array})
+    testDate: number[]
 
-    @Prop({required:true})
-    testAge: string
+    @Prop({required:true, type:Array})
+    birthDate: number[]
+
+    @Prop({required:true, type:Array})
+    testAge: number[]
 
     @Prop({type:Object, required:true, default: {}})
     blockDesign: object

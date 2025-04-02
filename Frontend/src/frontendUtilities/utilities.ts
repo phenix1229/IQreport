@@ -1,18 +1,14 @@
-
-
 const computeMonth = (testMonth:number, birthMonth:number, testDay:number, birthDay:number) => {
     if((testDay < birthDay) && (testMonth !== birthMonth)){
         return (11 - (birthMonth - testMonth))
     } 
-    
     if(testDay >= birthDay){
-
         return (12 - (birthMonth - testMonth))
     }
-
     if(testMonth === birthMonth && (testDay >= birthDay)){
         return 0
     }
+    return 0
 }
 
 const computeDay = (testDay:number, birthDay:number, testYear:number, testMonth:number) => {

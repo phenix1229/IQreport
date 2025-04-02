@@ -1,11 +1,12 @@
 import { SyntheticEvent, useState } from 'react'
-import { Box, Button, Container, FormControl, FormGroup, TextField } from '@mui/material'
+import { Box, Button, TextField } from '@mui/material'
 import Grid from '@mui/material/Grid2'
-import * as utils from '../frontendUtilities/utilities'
+import { computeDay, computeMonth, computeYear } from '../frontendUtilities/utilities'
 import axios from 'axios';
-// import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 const NameAndDateForm = () => {
+  const [redirect, setRedirect] = useState(false);
   const [psychologistFirstName, setPsychologistFirstName] = useState('');
   const [psychologistLastName, setPsychologistLastName] = useState('');
   const [subjectFirstName, setSubjectFirstName] = useState('');
@@ -16,21 +17,50 @@ const NameAndDateForm = () => {
   const [birthDateYear, setBirthDateYear] = useState('');
   const [birthdateMonth, setBirthDateMonth] = useState('');
   const [birthDateDay, setBirthDateDay] = useState('');
-  // const [testAgeYear, setTestAgeYear] = useState(0);
+  const [testAgeYear, setTestAgeYear] = useState('');
   const [testAgeMonth, setTestAgeMonth] = useState('');
   const [testAgeDay, setTestAgeDay] = useState('');
 
-    const submit = async (e:SyntheticEvent) => {
-      e.preventDefault();
-      try{
-      const response:any = await axios.post('http://localhost:5000/api/users/login', {
-      //   email,
-      //   password
-      }, {withCredentials:true})
-      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+
+  const submit = async (e:SyntheticEvent) => {
+    e.preventDefault();
+    try{
+      // const sub = await axios.get('http://localhost:5000/api/subjects')
+      await axios.post('http://localhost:5000/api/reports', {
+        psychologistFirstName,
+        psychologistLastName,
+        subjectFirstName,
+        subjectLastName,
+        testDate:[
+        Number(testDateYear),
+        Number(testDateMonth),
+        Number(testDateDay)],
+        birthDate:[
+        Number(birthDateYear),
+        Number(birthdateMonth),
+        Number(birthDateDay)],
+        testAge:[
+        Number(testAgeYear),
+        Number(testAgeMonth),
+        Number(testAgeDay)]
+      })
+      setRedirect(true);
     } catch(error:any){
       alert(error.response.data.message)
     }
+  }
+
+  const computeAge = (e:SyntheticEvent) => {
+    e.preventDefault();
+    setTestAgeMonth(String(computeMonth(Number(testDateMonth),Number(birthdateMonth),Number(testDateDay),Number(birthDateDay))));
+    setTestAgeDay(String(computeDay(Number(testDateDay),Number(birthDateDay),Number(testDateYear),Number(testDateMonth))));
+    setTestAgeYear(String(computeYear(Number(testDateMonth),Number(birthdateMonth),Number(testDateYear),Number(birthDateYear),Number(testDateDay),Number(birthDateDay))));
+  }
+
+  if(redirect){
+    return(
+      <Navigate to={'/scorePage'} />
+    )
   }
 
     return (
@@ -105,7 +135,7 @@ const NameAndDateForm = () => {
               id='birthdateMonth'
               label="Birth month"
               value={birthdateMonth}
-              onChange={(Event) => setBirthDateMonth(Event.target.value)}
+              onChange={(Event) => {setBirthDateMonth(Event.target.value)}}
             />
             <TextField
               required
@@ -113,39 +143,45 @@ const NameAndDateForm = () => {
               id='birthDateDay'
               label="Birth day"
               value={birthDateDay}
-              onChange={(Event) => setBirthDateDay(Event.target.value)}
+              onChange={(Event) => {setBirthDateDay(Event.target.value)}}
             />
             <TextField
               required
               margin='normal'
               id='birthDateYear'
-              label="Birth tear"
+              label="Birth year"
               value={birthDateYear}
-              onChange={(Event) => setBirthDateYear(Event.target.value)}
+              onChange={(Event) => {setBirthDateYear(Event.target.value)}}
             />
           </Grid>
+          <p>
+            Subject age
+          </p>
+          <Button variant="contained" onClick={(e)=>{computeAge(e)}}>Compute age</Button>
           <Grid textAlign={'left'}>
             <TextField
               required
               margin='normal'
               id='testAgeYear'
-              value={utils.computeYear(Number(testDateMonth),Number(birthdateMonth),Number(testDateYear),Number(birthDateYear),Number(testDateDay),Number(birthDateDay))}
-              // value={testAgeYear}
-              // onChange={(Event) => setTestAgeYear(Event.target.value)}
+              label="Years"
+              disabled
+              value={testAgeYear}
             />
             <TextField
               required
               margin='normal'
               id='testAgeMonth'
+              label="Months"
+              disabled
               value={testAgeMonth}
-              onChange={(Event) => setTestAgeMonth(Event.target.value)}
             />
             <TextField
               required
               margin='normal'
               id='testAgeDay'
+              label="Days"
+              disabled
               value={testAgeDay}
-              onChange={(Event) => setTestAgeDay(Event.target.value)}
             />
           </Grid>
           <Button variant="contained" onClick={(e)=>{submit(e)}}>Submit</Button>
