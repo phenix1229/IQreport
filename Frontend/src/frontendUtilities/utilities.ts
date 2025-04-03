@@ -52,7 +52,7 @@ const dsScale = {
     "8to11":[[[0,1,2],1],[[3,4],2],[[5],3],[[6,7],4],[[8,9],5],[[10,11],6],[[12,13],7],[[14,15],8],[[16],9],[[17,18],10],[[19,20],11],[[21],12],[[22,23],13],[[24],14],[[25,26],15],[[27],16],[[28,29],17],[[30],18],[[31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54],19]]
 }
 
-const cdScale = {
+const coScale = {
     "0to3":[[[0,1,2,3,4,5],1],[[6],2],[[7,8],3],[[9,10],4],[[11,12],5],[[13,14],6],[[15,16],7],[[17,18],8],[[19,20,21],9],[[22,23,24],10],[[25,26,27],11],[[28,29,30,31],12],[[32,33,34,35],13],[[36,37,38],14],[[39,40,41],15],[[42,43,44,45],16],[[46,47,48,49,50],17],[[51,52,53,54,55],18],[[56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75],19]],
     "4to7":[[[0,1,2,3,4,5,6],1],[[7,8],2],[[9,10],3],[[11,12],4],[[13,14],5],[[15,16],6],[[17,18],7],[[19,20,21],8],[[22,23],9],[[24,25,26],10],[[27,28,29,30],11],[[31,32,33,34],12],[[35,36,37,38],13],[[39,40,41],14],[[42,43,44,45],15],[[46,47,48,49],16],[[50,51,52,53,54],17],[[55,56,57,58,59],18],[[60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75],19]],
     "8to11":[[[0,1,2,3,4,5,6,7,8],1],[[9],2],[[10,11],3],[[12,13],4],[[14,15],5],[[16,17],6],[[18,19],7],[[20,21,22],8],[[23,24,25],9],[[26,27,28,29],10],[[30,31,32,33],11],[[34,35,36,37],12],[[38,39,40],13],[[41,42,43,44],14],[[45,46,47,48],15],[[49,50,51,52,53],16],[[54,55,56,57,58],17],[[59,60,61,62,63],18],[[64,65,66,67,68,69,70,71,72,73,74,75],19]]
@@ -102,25 +102,27 @@ const fsIq = [
     [113,143,"99.8"],[114,144,"99.8"],[115,145,"99.9"],[116,146,"99.9"],[117,147,"99.9"],[118,148,"99.9"],[119,149,"99.9"],[120,150,">99.9"],[121,151,">99.9"],[122,152,">99.9"],[123,153,">99.9"],[124,154,">99.9"],[125,155,">99.9"],[126,156,">99.9"],[127,157,">99.9"],[128,158,">99.9"],[129,159,">99.9"],[130,160,">99.9"],[131,160,">99.9"],[132,160,">99.9"],[133,160,">99.9"]
 ]
 
-const getScaledScore = (rawScore:number, arr:any) => {
-    for(let i = 0; i < arr.length; i++){
-        if(arr[i][0].includes(rawScore)){
-            return arr[i][1]
+const getScaledScore = (rawScore:number, scale:any, arr:any) => {
+    let arry = scale[arr];
+    console.log(arry)
+    for(let i = 0; i < arry.length; i++){
+        if(arry[i][0].includes(rawScore)){
+            return arry[i][1]
         }
     }
 }
 
-const convertRawToScale = (scale:string, rawScore:number, ageMonth:number) => {
+const convertRawToScale = (scale:any, rawScore:number, ageMonth:number) => {
     if(ageMonth >= 0 && ageMonth <=3){
-        var scoreScale:string = `${scale}[0to3]`
-        return getScaledScore(rawScore, scoreScale)
+        var arr:string = "0to3"
+        return getScaledScore(rawScore, scale, arr)
     }
     if(ageMonth >= 4 && ageMonth <=7){
-        var scoreScale:string = `${scale}[4to7]`
-        return getScaledScore(rawScore, scoreScale)
+        var arr:string = "4to7"
+        return getScaledScore(rawScore, scale, arr)
     }
-    var scoreScale:string = `${scale}[8to11]`
-    return getScaledScore(rawScore, scoreScale)
+    var arr:string = "8to11"
+    return getScaledScore(rawScore, scale, arr)
 }
 
 const convertSumOfScaleToComposite = (sum:number, composite:string) => {
@@ -139,7 +141,7 @@ export {
     siScale,
     mrScale,
     dsScale,
-    cdScale,
+    coScale,
     vcScale,
     fwScale,
     vpScale,

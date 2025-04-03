@@ -1,7 +1,21 @@
 import {SyntheticEvent, useState} from 'react'
-import { Button, Container, FormControl, FormGroup, TextField } from '@mui/material'
-import axios from 'axios';
+import { Button, TextField } from '@mui/material'
 import { Navigate } from 'react-router-dom';
+import Grid from '@mui/material/Grid2';
+import { 
+  bdScale,
+  siScale,
+  mrScale,
+  dsScale,
+  coScale,
+  vcScale,
+  fwScale,
+  vpScale,
+  psScale,
+  ssScale,
+  convertRawToScale  
+} from '../frontendUtilities/utilities';
+import axios from 'axios';
 
 
 const ScoreForm = () => {
@@ -28,18 +42,34 @@ const ScoreForm = () => {
   const [ssScaledScore, setSsScaleScore] = useState('')
   const [redirect, setRedirect] = useState(false);
 
+  const ageMonth = localStorage.getItem('ageMonth');
+  const reportId = localStorage.getItem('reportId');
+
   const submit = async (e:SyntheticEvent) => {
     e.preventDefault();
     try{
-    const response:any = await axios.post('http://localhost:5000/api/users/login', {
+      await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
     //   email,
     //   password
-    }, {withCredentials:true})
-    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+    })
     setRedirect(true)
   } catch(error:any){
     alert(error.response.data.message)
   }
+}
+
+const computeScores = (e:SyntheticEvent) => {
+  e.preventDefault();
+  setBdScaledScore(convertRawToScale(bdScale,Number(bdRawScore),Number(ageMonth)))
+  setSiScaledScore(convertRawToScale(siScale,Number(siRawScore),Number(ageMonth)))
+  setMrScaledScore(convertRawToScale(mrScale,Number(mrRawScore),Number(ageMonth)))
+  setDsScaledScore(convertRawToScale(dsScale,Number(dsRawScore),Number(ageMonth)))
+  setCoScaledScore(convertRawToScale(coScale,Number(coRawScore),Number(ageMonth)))
+  setVcScaledScore(convertRawToScale(vcScale,Number(vcRawScore),Number(ageMonth)))
+  setFwScaledScore(convertRawToScale(fwScale,Number(fwRawScore),Number(ageMonth)))
+  setVpScaledScore(convertRawToScale(vpScale,Number(vpRawScore),Number(ageMonth)))
+  setPsScaledScore(convertRawToScale(psScale,Number(psRawScore),Number(ageMonth)))
+  setSsScaleScore(convertRawToScale(ssScale,Number(ssRawScore),Number(ageMonth)))
 }
 
 if(redirect){
@@ -47,163 +77,222 @@ if(redirect){
   }
 
   return (
-    <Container>
-    <FormControl>
-      <FormGroup>
-      <TextField
-        required
-        margin='normal'
-        id='bdRawScore'
-        label="Block design"
-        value={bdRawScore}
-        onChange={(Event) => setBdRawScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='bdScaledScore'
-        value={bdScaledScore}
-        onChange={(Event) => setBdScaledScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='siRawScore'
-        label="Similarities"
-        value={siRawScore}
-        onChange={(Event) => setSiRawScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='siScaledScore'
-        value={siScaledScore}
-        onChange={(Event) => setSiScaledScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='mrRawScore'
-        label="Matrix reasoning"
-        value={mrRawScore}
-        onChange={(Event) => setMrRawScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='mrScaledScore'
-        value={mrScaledScore}
-        onChange={(Event) => setMrScaledScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='dsRawScore'
-        label="Digit span"
-        value={dsRawScore}
-        onChange={(Event) => setDsRawScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='dsScaledScore'
-        value={dsScaledScore}
-        onChange={(Event) => setDsScaledScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='coRawScore'
-        label="Coding"
-        value={coRawScore}
-        onChange={(Event) => setCoRawScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='coScaledScore'
-        value={coScaledScore}
-        onChange={(Event) => setCoScaledScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='vcRawScore'
-        label="Vocabulary"
-        value={vcRawScore}
-        onChange={(Event) => setVcRawScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='vcScaledScore'
-        value={vcScaledScore}
-        onChange={(Event) => setVcScaledScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='fwRawScore'
-        label="Figure weights"
-        value={fwRawScore}
-        onChange={(Event) => setFwRawScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='fwScaledScore'
-        value={fwScaledScore}
-        onChange={(Event) => setFwScaledScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='vpRawScore'
-        label="Visual puzzles"
-        value={vpRawScore}
-        onChange={(Event) => setVpRawScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='vpScaledScore'
-        value={vpScaledScore}
-        onChange={(Event) => setVpScaledScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='psRawScore'
-        label="Picture span"
-        value={psRawScore}
-        onChange={(Event) => setPsRawScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='psScaledScore'
-        value={psScaledScore}
-        onChange={(Event) => setPsScaledScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='ssRawScore'
-        label="Symbol search"
-        value={ssRawScore}
-        onChange={(Event) => setSsRawScore(Event.target.value)}
-      />
-      <TextField
-        required
-        margin='normal'
-        id='ssScaledScore'
-        value={ssScaledScore}
-        onChange={(Event) => setSsScaleScore(Event.target.value)}
-      />
-      <Button variant="contained" onClick={(e)=>{submit(e)}}>Submit</Button>
-      </FormGroup>
-    </FormControl>
-    </Container>
+    <>
+      <br />
+      <br />
+        <Grid container size={12} spacing={2}>
+          <Grid container size={6} justifyContent={'center'}>
+          <Grid textAlign={'center'}>
+            <p>Block design</p>
+            <TextField
+              required
+              margin='normal'
+              id='bdRawScore'
+              label="Raw score"
+              value={bdRawScore}
+              onChange={(Event) => setBdRawScore(Event.target.value)}
+            />
+            <TextField
+              required
+              disabled
+              margin='normal'
+              id='bdScaledScore'
+              label="Scaled score"
+              value={bdScaledScore}
+              onChange={(Event) => setBdScaledScore(Event.target.value)}
+            />
+          </Grid>
+          <Grid textAlign={'center'}>
+            <p>Similarities</p>
+            <TextField
+              required
+              margin='normal'
+              id='siRawScore'
+              label="Raw score"
+              value={siRawScore}
+              onChange={(Event) => setSiRawScore(Event.target.value)}
+            />
+            <TextField
+              required
+              disabled
+              margin='normal'
+              id='siScaledScore'
+              label="Scaled score"
+              value={siScaledScore}
+              onChange={(Event) => setSiScaledScore(Event.target.value)}
+            />
+          </Grid>
+          <Grid textAlign={'center'}>
+            <p>Matrix reasoning</p>
+            <TextField
+              required
+              margin='normal'
+              id='mrRawScore'
+              label="Raw score"
+              value={mrRawScore}
+              onChange={(Event) => setMrRawScore(Event.target.value)}
+            />
+            <TextField
+              required
+              disabled
+              margin='normal'
+              id='mrScaledScore'
+              label="Scaled score"
+              value={mrScaledScore}
+              onChange={(Event) => setMrScaledScore(Event.target.value)}
+            />
+          </Grid>
+          <Grid textAlign={'center'}>
+            <p>Digit span</p>
+            <TextField
+              required
+              margin='normal'
+              id='dsRawScore'
+              label="Raw score"
+              value={dsRawScore}
+              onChange={(Event) => setDsRawScore(Event.target.value)}
+            />
+            <TextField
+              required
+              disabled
+              margin='normal'
+              id='dsScaledScore'
+              label="Scaled score"
+              value={dsScaledScore}
+              onChange={(Event) => setDsScaledScore(Event.target.value)}
+            />
+          </Grid>
+          <Grid textAlign={'center'}>
+            <p>Coding</p>
+            <TextField
+              required
+              margin='normal'
+              id='coRawScore'
+              label="Raw score"
+              value={coRawScore}
+              onChange={(Event) => setCoRawScore(Event.target.value)}
+            />
+            <TextField
+              required
+              disabled
+              margin='normal'
+              id='coScaledScore'
+              label="Scaled score"
+              value={coScaledScore}
+              onChange={(Event) => setCoScaledScore(Event.target.value)}
+            />
+          </Grid>
+          </Grid>
+          <Grid container size={6} justifyContent={'center'}>
+          <Grid textAlign={'center'}>
+            <p>Vocabulary</p>
+            <TextField
+              required
+              margin='normal'
+              id='vcRawScore'
+              label="Raw score"
+              value={vcRawScore}
+              onChange={(Event) => setVcRawScore(Event.target.value)}
+            />
+            <TextField
+              required
+              disabled
+              margin='normal'
+              id='vcScaledScore'
+              label="Scaled score"
+              value={vcScaledScore}
+              onChange={(Event) => setVcScaledScore(Event.target.value)}
+            />
+          </Grid>
+          <Grid textAlign={'center'}>
+            <p>Figure weights</p>
+            <TextField
+              required
+              margin='normal'
+              id='fwRawScore'
+              label="Raw score"
+              value={fwRawScore}
+              onChange={(Event) => setFwRawScore(Event.target.value)}
+            />
+            <TextField
+              required
+              disabled
+              margin='normal'
+              id='fwScaledScore'
+              label="Scaled score"
+              value={fwScaledScore}
+              onChange={(Event) => setFwScaledScore(Event.target.value)}
+            />
+          </Grid>
+          <Grid textAlign={'center'}>
+            <p>Visual puzzles</p>
+            <TextField
+              required
+              margin='normal'
+              id='vpRawScore'
+              label="Raw score"
+              value={vpRawScore}
+              onChange={(Event) => setVpRawScore(Event.target.value)}
+            />
+            <TextField
+              required
+              disabled
+              margin='normal'
+              id='vpScaledScore'
+              label="Scaled score"
+              value={vpScaledScore}
+              onChange={(Event) => setVpScaledScore(Event.target.value)}
+            />
+          </Grid>
+          <Grid textAlign={'center'}>
+            <p>Picture span</p>
+            <TextField
+              required
+              margin='normal'
+              id='psRawScore'
+              label="Raw score"
+              value={psRawScore}
+              onChange={(Event) => setPsRawScore(Event.target.value)}
+            />
+            <TextField
+              required
+              disabled
+              margin='normal'
+              id='psScaledScore'
+              label="Scaled score"
+              value={psScaledScore}
+              onChange={(Event) => setPsScaledScore(Event.target.value)}
+            />
+          </Grid>
+          <Grid textAlign={'center'}>
+            <p>Symbol search</p>
+            <TextField
+              required
+              margin='normal'
+              id='ssRawScore'
+              label="Raw score"
+              value={ssRawScore}
+              onChange={(Event) => setSsRawScore(Event.target.value)}
+            />
+            <TextField
+              required
+              disabled
+              margin='normal'
+              id='ssScaledScore'
+              label="Scaled score"
+              value={ssScaledScore}
+              onChange={(Event) => setSsScaleScore(Event.target.value)}
+            />
+          </Grid>
+          </Grid>
+          <Grid size={12}>
+            <Button variant="contained" onClick={(e)=>{computeScores(e)}}>Compute scores</Button>
+          </Grid>
+          <Grid size={12}>
+            <Button variant="contained" onClick={(e)=>{submit(e)}}>Submit</Button>
+          </Grid>
+      </Grid>
+      </>
   )
 }
 

@@ -26,7 +26,7 @@ const NameAndDateForm = () => {
     e.preventDefault();
     try{
       // const sub = await axios.get('http://localhost:5000/api/subjects')
-      await axios.post('http://localhost:5000/api/reports', {
+      const newReport = await axios.post('http://localhost:5000/api/reports', {
         psychologistFirstName,
         psychologistLastName,
         subjectFirstName,
@@ -44,6 +44,8 @@ const NameAndDateForm = () => {
         Number(testAgeMonth),
         Number(testAgeDay)]
       })
+      localStorage.setItem('ageMonth',testAgeMonth);
+      localStorage.setItem('reportId',newReport.data.report._id);
       setRedirect(true);
     } catch(error:any){
       alert(error.response.data.message)
