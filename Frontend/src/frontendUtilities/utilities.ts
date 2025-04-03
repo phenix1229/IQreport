@@ -149,6 +149,12 @@ export {
     ssScale,
     getScaledScore,
     convertRawToScale,
+    vciComposite,
+    vsiComposite,
+    friComposite,
+    wmiComposite,
+    psiComposite,
+    fsIq,
     convertSumOfScaleToComposite,
     getFsIq
 }
