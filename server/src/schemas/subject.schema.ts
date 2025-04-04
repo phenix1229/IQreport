@@ -10,6 +10,9 @@ export class Subject {
 
     @Prop({required:true})
     lastName: string
+    
+    @Prop({required:true})
+    email: string
 
     @Prop({required:true})
     birthMonth: String

@@ -11,6 +11,7 @@ const NameAndDateForm = () => {
   const [psychologistLastName, setPsychologistLastName] = useState('');
   const [subjectFirstName, setSubjectFirstName] = useState('');
   const [subjectLastName, setSubjectLastName] = useState('');
+  const [subjectEmail, setSubjectEmail] = useState('');
   const [testDateYear, setTestDateYear] = useState('');
   const [testDateMonth, setTestDateMonth] = useState('');
   const [testDateDay, setTestDateDay] = useState('');
@@ -21,11 +22,9 @@ const NameAndDateForm = () => {
   const [testAgeMonth, setTestAgeMonth] = useState('');
   const [testAgeDay, setTestAgeDay] = useState('');
 
-
   const submit = async (e:SyntheticEvent) => {
     e.preventDefault();
     try{
-      // const sub = await axios.get('http://localhost:5000/api/subjects')
       const newReport = await axios.post('http://localhost:5000/api/reports', {
         psychologistFirstName,
         psychologistLastName,
@@ -44,8 +43,23 @@ const NameAndDateForm = () => {
         Number(testAgeMonth),
         Number(testAgeDay)]
       })
+      if(`http://localhost:5000/api/subjects/exists/${subjectEmail}`){
+        await axios.put(`http://localhost:5000/api/subjects/${subjectEmail}`, {
+          $push: {reports:newReport.data._id}
+        })
+      } else {
+        await axios.post('http://localhost:5000/api/subjects', {
+          firstName:subjectFirstName,
+          lastName:subjectLastName,
+          birthMonth: birthdateMonth,
+          birthDay: birthDateDay,
+          birthYear: birthDateYear,
+          email: subjectEmail,
+          reports:[newReport.data._id]
+        })
+      }
       localStorage.setItem('ageMonth',testAgeMonth);
-      localStorage.setItem('reportId',newReport.data.report._id);
+      localStorage.setItem('reportId',newReport.data._id);
       setRedirect(true);
     } catch(error:any){
       alert(error.response.data.message)
@@ -154,6 +168,16 @@ const NameAndDateForm = () => {
               label="Birth year"
               value={birthDateYear}
               onChange={(Event) => {setBirthDateYear(Event.target.value)}}
+            />
+          </Grid>
+          <Grid textAlign={'left'}>
+            <TextField
+              required
+              margin='normal'
+              id='subjectEmail'
+              label="Subject email"
+              value={subjectEmail}
+              onChange={(Event) => setSubjectEmail(Event.target.value)}
             />
           </Grid>
           <p>

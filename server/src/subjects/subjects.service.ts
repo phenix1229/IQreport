@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSubjectDto } from './dto/create-subject.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -10,6 +10,9 @@ export class SubjectsService {
   constructor(@InjectModel('Subject') private subjectModel: Model<SubjectDocument>){}
   
   async create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
+    if(await this.subjectModel.find({email:createSubjectDto.email})){
+      throw new ConflictException('This subject already exists.');
+    }
     const subject = await new this.subjectModel(createSubjectDto).save();
     return subject;
   }
@@ -18,20 +21,28 @@ export class SubjectsService {
     return await this.subjectModel.find();
   }
 
-  async findOne(id: string) {
-    const subject = await this.subjectModel.findById({_id:id});
+  async findOne(email: string) {
+    const subject = await this.subjectModel.findOne({email});
     if(!subject){
-      throw new NotFoundException();
+      throw new NotFoundException('Subject does not exist.');
     }
     return subject;
   }
 
-  async update(id: string, updateSubjectDto: UpdateSubjectDto) {
-    const subject = await this.subjectModel.findOne({_id:id});
+  async doesExist(email: string) {
+    const subject = await this.subjectModel.findOne({email});
+    if(!subject){
+      return true;
+    }
+    return false;
+  }
+
+  async update(email: string, updateSubjectDto: UpdateSubjectDto) {
+    const subject = await this.subjectModel.findOne({email});
     if(!subject){
         throw new NotFoundException('Subject does not exist.');
     }
-    const updatedSubject = await this.subjectModel.updateOne({_id:id}, {$set: {...updateSubjectDto}});
+    const updatedSubject = await this.subjectModel.updateOne({email}, {$set: {...updateSubjectDto}});
     return subject;
   }
 }

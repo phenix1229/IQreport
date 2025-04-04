@@ -9,12 +9,15 @@ export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
 
 @Post()
-  async create(@Res() res:express.Response, @Body() createSubjectDto: CreateSubjectDto) {
-    const newSubject = this.subjectsService.create(createSubjectDto);
-    return res.status(HttpStatus.OK).json({
-      message: 'Subject created successfully.',
-      subject: newSubject
-    });
+  async create(@Res() res, @Body() createSubjectDto: CreateSubjectDto) {
+    const newSubject = await this.subjectsService.create(createSubjectDto);
+    if(newSubject){
+      return res.status(HttpStatus.OK).json({
+        message: 'Subject created successfully.',
+        subject: newSubject
+      });
+    }
+    return res.message;
   }
 
   @Get('all')
@@ -23,18 +26,27 @@ export class SubjectsController {
     return res.status(HttpStatus.OK).json(subjects);
   }
 
-  @Get(':id')
-  async findOne(@Res() res:express.Response, @Param('id') id: string) {
-    const subject = await this.subjectsService.findOne(id);
+  @Get(':email')
+  async findOne(@Res() res:express.Response, @Param('email') email: string) {
+    const subject = await this.subjectsService.findOne(email);
+    if(!subject){
+      throw new NotFoundException('Subject does not exist.');
+    }
+    return res.status(HttpStatus.OK).json(subject)
+  }
+  
+  @Get('exists/:email')
+  async doesExist(@Res() res:express.Response, @Param('email') email: string) {
+    const subject = await this.subjectsService.findOne(email);
     if(!subject){
       throw new NotFoundException('Subject does not exist.');
     }
     return res.status(HttpStatus.OK).json(subject)
   }
 
-  @Put(':id')
-  async update(@Res() res:express.Response, @Param('id') id:string, @Body() updateSubjectDto:UpdateSubjectDto){
-    const updatedSubject = await this.subjectsService.update(id, updateSubjectDto);
+  @Put(':email')
+  async update(@Res() res:express.Response, @Param('email') email:string, @Body() updateSubjectDto:UpdateSubjectDto){
+    const updatedSubject = await this.subjectsService.update(email, updateSubjectDto);
     if(!updatedSubject){
       throw new NotFoundException('Subject does not exist.');
     }

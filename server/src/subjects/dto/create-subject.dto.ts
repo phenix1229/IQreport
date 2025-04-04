@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsArray, IsOptional } from "class-validator"
+import { IsNotEmpty, IsString, IsArray, IsOptional, IsEmail } from "class-validator"
 
 export class CreateSubjectDto {
    @IsNotEmpty()
@@ -8,6 +8,10 @@ export class CreateSubjectDto {
    @IsNotEmpty()
    @IsString()
    lastName: string
+   
+   @IsNotEmpty()
+   @IsEmail()
+   email: string
    
    @IsNotEmpty()
    @IsString()
