@@ -70,10 +70,16 @@ const computeScores = (e:SyntheticEvent) => {
   setVpScaledScore(convertRawToScale(vpScale,Number(vpRawScore),Number(ageMonth)))
   setPsScaledScore(convertRawToScale(psScale,Number(psRawScore),Number(ageMonth)))
   setSsScaleScore(convertRawToScale(ssScale,Number(ssRawScore),Number(ageMonth)))
+  localStorage.setItem("vciSum",String(Number(bdScaledScore) + Number(bdScaledScore)))
+  localStorage.setItem("vsiSum",String(Number(coScaledScore) + Number(coScaledScore)))
+  localStorage.setItem("friSum",String(Number(bdScaledScore) + Number(bdScaledScore))) 
+  localStorage.setItem("wmiSum",String(Number(bdScaledScore) + Number(bdScaledScore)))
+  localStorage.setItem("psiSum",String(Number(bdScaledScore) + Number(bdScaledScore)))
+  localStorage.setItem("fsIqSum",String(Number(bdScaledScore) + Number(bdScaledScore)))
 }
 
 if(redirect){
-    return <Navigate to="/userHome" />
+    return <Navigate to="/compositeIqPage" />
   }
 
   return (
@@ -81,7 +87,7 @@ if(redirect){
       <br />
       <br />
         <Grid container size={12} spacing={2}>
-          <Grid container size={6} justifyContent={'center'}>
+          <Grid container size={6} justifyContent={'right'}>
           <Grid textAlign={'center'}>
             <p>Block design</p>
             <TextField
@@ -183,7 +189,7 @@ if(redirect){
             />
           </Grid>
           </Grid>
-          <Grid container size={6} justifyContent={'center'}>
+          <Grid container size={6} justifyContent={'left'}>
           <Grid textAlign={'center'}>
             <p>Vocabulary</p>
             <TextField

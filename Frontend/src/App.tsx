@@ -7,6 +7,8 @@ import Register from './pages/Register'
 import UserHome from './pages/UserHome'
 import NameAndDate from './pages/NameAndDate'
 import ScorePage from './pages/ScorePage'
+import CompositeIqPage from './pages/CompositeIqPage'
+import WrittenReportPage from './pages/WrittenReportPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +19,8 @@ const router = createBrowserRouter(
         <Route path='/userHome' element={<UserHome />}/>
         <Route path='/nameAndDate' element={<NameAndDate />}/>
         <Route path='/scorePage' element={<ScorePage />}/>
+        <Route path='/compositeIqPage' element={<CompositeIqPage />}/>
+        <Route path='/writtenReportPage' element={<WrittenReportPage />}/>
       </Route>
   )
 )
