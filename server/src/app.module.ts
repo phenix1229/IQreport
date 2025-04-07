@@ -13,7 +13,6 @@ import { ReportsService } from './reports/reports.service';
 import { SubjectsModule } from './subjects/subjects.module';
 import { SubjectsService } from './subjects/subjects.service';
 import { SubjectSchema } from './schemas/subject.schema';
-import { TestModule } from './test/test.module';
 
 @Module({
   imports: [
@@ -38,7 +37,7 @@ import { TestModule } from './test/test.module';
     }),
     ReportsModule,
     SubjectsModule,
-    TestModule
+    PsychologistsModule
   ],
   controllers: [AppController],
   providers: [
