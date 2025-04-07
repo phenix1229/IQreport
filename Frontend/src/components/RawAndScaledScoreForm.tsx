@@ -49,9 +49,23 @@ const ScoreForm = () => {
     e.preventDefault();
     try{
       await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
-    //   email,
-    //   password
+        blockDesign:{rawScore:bdRawScore,scaledScore:bdScaledScore},
+        similarities:{rawScore:siRawScore,scaledScore:siScaledScore},
+        matrixReasoning:{rawScore:mrRawScore,scaledScore:mrScaledScore},
+        digitSpan:{rawScore:dsRawScore,scaledScore:dsScaledScore},
+        coding:{rawScore:coRawScore,scaledScore:coScaledScore},
+        vocabulary:{rawScore:vcRawScore,scaledScore:vcScaledScore},
+        figureWeights:{rawScore:fwRawScore,scaledScore:fwScaledScore},
+        visualPuzzles:{rawScore:vpRawScore,scaledScore:vpScaledScore},
+        pictureSpan:{rawScore:psRawScore,scaledScore:psScaledScore},
+        symbolSearch:{rawScore:ssRawScore,scaledScore:ssScaledScore},
     })
+    localStorage.setItem("vciSum",String(Number(siScaledScore) + Number(vcScaledScore)))
+    localStorage.setItem("vsiSum",String(Number(bdScaledScore) + Number(vpScaledScore)))
+    localStorage.setItem("friSum",String(Number(mrScaledScore) + Number(fwScaledScore))) 
+    localStorage.setItem("wmiSum",String(Number(dsScaledScore) + Number(psScaledScore)))
+    localStorage.setItem("psiSum",String(Number(coScaledScore) + Number(ssScaledScore)))
+    localStorage.setItem("fsIqSum",String(Number(bdScaledScore) + Number(siScaledScore) + Number(mrScaledScore) + Number(dsScaledScore) + Number(coScaledScore) + Number(vcScaledScore) + Number(fwScaledScore) + Number(vpScaledScore) + Number(psScaledScore) + Number(ssScaledScore)))
     setRedirect(true)
   } catch(error:any){
     alert(error.response.data.message)
@@ -70,12 +84,6 @@ const computeScores = (e:SyntheticEvent) => {
   setVpScaledScore(convertRawToScale(vpScale,Number(vpRawScore),Number(ageMonth)))
   setPsScaledScore(convertRawToScale(psScale,Number(psRawScore),Number(ageMonth)))
   setSsScaleScore(convertRawToScale(ssScale,Number(ssRawScore),Number(ageMonth)))
-  localStorage.setItem("vciSum",String(Number(bdScaledScore) + Number(bdScaledScore)))
-  localStorage.setItem("vsiSum",String(Number(coScaledScore) + Number(coScaledScore)))
-  localStorage.setItem("friSum",String(Number(bdScaledScore) + Number(bdScaledScore))) 
-  localStorage.setItem("wmiSum",String(Number(bdScaledScore) + Number(bdScaledScore)))
-  localStorage.setItem("psiSum",String(Number(bdScaledScore) + Number(bdScaledScore)))
-  localStorage.setItem("fsIqSum",String(Number(bdScaledScore) + Number(bdScaledScore)))
 }
 
 if(redirect){

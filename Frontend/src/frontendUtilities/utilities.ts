@@ -125,7 +125,7 @@ const convertRawToScale = (scale:any, rawScore:number, ageMonth:number) => {
     return getScaledScore(rawScore, scale, arr)
 }
 
-const convertSumOfScaleToComposite = (sum:number, composite:string) => {
+const convertSumOfScaleToComposite = (sum:number, composite:Array<any>) => {
     return composite[sum -2];
 }
 

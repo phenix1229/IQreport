@@ -9,13 +9,9 @@ export class ReportsController {
   constructor(private readonly reportsService: ReportsService) {}
 
   @Post()
-  async create(@Res() res:express.Response, @Body() createReportDto: CreateReportDto) {
-    const newReport = this.reportsService.create(createReportDto);
-    return res.status(HttpStatus.OK).json({
-      message: 'Report created successfully.',
-      report: newReport
-    });
-  }
+    create(@Body() createReportDto: CreateReportDto) {
+      return this.reportsService.create(createReportDto);
+    }
 
   @Get('all')
   async findAll(@Res() res:express.Response) {

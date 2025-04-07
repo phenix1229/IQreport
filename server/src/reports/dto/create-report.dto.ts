@@ -31,45 +31,52 @@ export class CreateReportDto {
 
     @IsNotEmpty()
     @IsObject()
-    blockDesign: object = {}
+    blockDesign: object = {rawScore:0,scaledScore:0}
 
     @IsNotEmpty()
     @IsObject()
-    similarities: object = {}
+    similarities: object = {rawScore:0,scaledScore:0}
 
     @IsNotEmpty()
     @IsObject()
-    matrixReasoning: object = {}
+    matrixReasoning: object = {rawScore:0,scaledScore:0}
 
     @IsNotEmpty()
     @IsObject()
-    digitSpan: object = {}
+    digitSpan: object = {rawScore:0,scaledScore:0}
 
     @IsNotEmpty()
     @IsObject()
-    coding: object = {}
+    coding: object = {rawScore:0,scaledScore:0}
 
     @IsNotEmpty()
     @IsObject()
-    vocabulary: object = {}
+    vocabulary: object = {rawScore:0,scaledScore:0}
 
     @IsNotEmpty()
     @IsObject()
-    figureWeights: object = {}
+    figureWeights: object = {rawScore:0,scaledScore:0}
 
     @IsNotEmpty()
     @IsObject()
-    visualPuzzles: object = {}
+    visualPuzzles: object = {rawScore:0,scaledScore:0}
 
     @IsNotEmpty()
     @IsObject()
-    pictureSpan: object = {}
+    pictureSpan: object = {rawScore:0,scaledScore:0}
 
     @IsNotEmpty()
     @IsObject()
-    symbolSearch: object = {}
+    symbolSearch: object = {rawScore:0,scaledScore:0}
 
     @IsNotEmpty()
     @IsObject()
-    scaledScoreToComposite: object = {}
+    scaledScoreToComposite: object = {
+        verbalComprehension:{sumOfScale:0,compositeScore:0,percentRank:''},
+        visualSpacial:{sumOfScale:0,compositeScore:0,percentRank:''},
+        fluidReasoning:{sumOfScale:0,compositeScore:0,percentRank:''},
+        workingMemory:{sumOfScale:0,compositeScore:0,percentRank:''},
+        processingSpeed:{sumOfScale:0,compositeScore:0,percentRank:''},
+        fullScale:{sumOfScale:0,compositeScore:0,percentRank:''}
+    }
 }

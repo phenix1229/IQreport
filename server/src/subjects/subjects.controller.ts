@@ -8,17 +8,10 @@ import * as express from 'express';
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
 
-@Post()
-  async create(@Res() res, @Body() createSubjectDto: CreateSubjectDto) {
-    const newSubject = await this.subjectsService.create(createSubjectDto);
-    if(newSubject){
-      return res.status(HttpStatus.OK).json({
-        message: 'Subject created successfully.',
-        subject: newSubject
-      });
+  @Post()
+    create(@Body() createSubjectDto: CreateSubjectDto) {
+      return this.subjectsService.create(createSubjectDto);
     }
-    return res.message;
-  }
 
   @Get('all')
   async findAll(@Res() res:express.Response) {
@@ -27,20 +20,16 @@ export class SubjectsController {
   }
 
   @Get(':email')
-  async findOne(@Res() res:express.Response, @Param('email') email: string) {
-    const subject = await this.subjectsService.findOne(email);
-    if(!subject){
-      throw new NotFoundException('Subject does not exist.');
-    }
-    return res.status(HttpStatus.OK).json(subject)
+  findOne(@Param('email') email: string) {
+    return this.subjectsService.findOne(email);
   }
   
-  @Get('exists/:email')
+  @Get('exists:email')
   async doesExist(@Res() res:express.Response, @Param('email') email: string) {
     const subject = await this.subjectsService.findOne(email);
-    if(!subject){
-      throw new NotFoundException('Subject does not exist.');
-    }
+    // if(!subject){
+    //   throw new NotFoundException('Subject does not exist.');
+    // }
     return res.status(HttpStatus.OK).json(subject)
   }
 

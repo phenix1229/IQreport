@@ -10,8 +10,8 @@ export class SubjectsService {
   constructor(@InjectModel('Subject') private subjectModel: Model<SubjectDocument>){}
   
   async create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
-    if(await this.subjectModel.find({email:createSubjectDto.email})){
-      throw new ConflictException('This subject already exists.');
+    if(await this.subjectModel.findOne({email:createSubjectDto.email})){
+      return await this.subjectModel.findOne({email:createSubjectDto.email})
     }
     const subject = await new this.subjectModel(createSubjectDto).save();
     return subject;
@@ -31,7 +31,7 @@ export class SubjectsService {
 
   async doesExist(email: string) {
     const subject = await this.subjectModel.findOne({email});
-    if(!subject){
+    if(subject.firstName != ''){
       return true;
     }
     return false;

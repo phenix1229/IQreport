@@ -21,7 +21,7 @@ const NameAndDateForm = () => {
   const [testAgeYear, setTestAgeYear] = useState('');
   const [testAgeMonth, setTestAgeMonth] = useState('');
   const [testAgeDay, setTestAgeDay] = useState('');
-
+  
   const submit = async (e:SyntheticEvent) => {
     e.preventDefault();
     try{
@@ -43,30 +43,27 @@ const NameAndDateForm = () => {
         Number(testAgeMonth),
         Number(testAgeDay)]
       })
-      if(`http://localhost:5000/api/subjects/exists/${subjectEmail}`){
-        await axios.put(`http://localhost:5000/api/subjects/${subjectEmail}`, {
-          $push: {reports:newReport.data._id}
-        })
-      } else {
-        await axios.post('http://localhost:5000/api/subjects', {
-          firstName:subjectFirstName,
-          lastName:subjectLastName,
-          birthMonth: birthdateMonth,
-          birthDay: birthDateDay,
-          birthYear: birthDateYear,
-          email: subjectEmail,
-          reports:[newReport.data._id]
-        })
-      }
+      const subject = await axios.post(`http://localhost:5000/api/subjects/`, {
+        firstName:subjectFirstName,
+        lastName:subjectLastName,
+        email:subjectEmail,
+        birthMonth:birthdateMonth,
+        birthDay:birthDateDay,
+        birthYear:birthDateYear
+      })
+      const reps = subject.data.reports;
+      await axios.put(`http://localhost:5000/api/subjects/${subjectEmail}`, {
+        reports: [...reps, newReport.data._id]
+      })
       localStorage.setItem('ageMonth',testAgeMonth);
       localStorage.setItem('reportId',newReport.data._id);
       setRedirect(true);
     } catch(error:any){
-      alert(error.response.data.message)
+      alert(error.message)
     }
   }
 
-  const computeAge = (e:SyntheticEvent) => {
+  const computeAge = async (e:SyntheticEvent) => {
     e.preventDefault();
     setTestAgeMonth(String(computeMonth(Number(testDateMonth),Number(birthdateMonth),Number(testDateDay),Number(birthDateDay))));
     setTestAgeDay(String(computeDay(Number(testDateDay),Number(birthDateDay),Number(testDateYear),Number(testDateMonth))));
@@ -83,7 +80,7 @@ const NameAndDateForm = () => {
       <Box sx={{ flexGrow: 1 }}>
         <br />
         <br />
-        <Grid spacing={2}>
+        <Grid>
           <Grid textAlign={'left'}>
             <TextField
               required

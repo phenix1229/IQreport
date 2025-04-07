@@ -26,37 +26,44 @@ export class Report {
     @Prop({required:true, type:Array})
     testAge: number[]
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
     blockDesign: object
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
     similarities: object
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
     matrixReasoning: object
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
     digitSpan: object
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
     coding: object
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
     vocabulary: object
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
     figureWeights: object
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
     visualPuzzles: object
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
     pictureSpan: object
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
     symbolSearch: object
 
-    @Prop({type:Object, required:true, default: {}})
+    @Prop({type:Object, required:true, default: {
+        verbalComprehension:{sumOfScale:0,compositeScore:0,percentRank:''},
+        visualSpacial:{sumOfScale:0,compositeScore:0,percentRank:''},
+        fluidReasoning:{sumOfScale:0,compositeScore:0,percentRank:''},
+        workingMemory:{sumOfScale:0,compositeScore:0,percentRank:''},
+        processingSpeed:{sumOfScale:0,compositeScore:0,percentRank:''},
+        fullScale:{sumOfScale:0,compositeScore:0,percentRank:''}
+    }})
     scaledScoreToComposite: object
 }
 

@@ -38,19 +38,25 @@ const CompositeAndFullScoreForm = () => {
   const [redirect, setRedirect] = useState(false);
 
   const reportId = localStorage.getItem("reportId");
-  const vciArr = convertSumOfScaleToComposite(Number(localStorage.getItem("vciSum")), "vciComposite");
-  const vsiArr = convertSumOfScaleToComposite(Number(localStorage.getItem("vsiSum")), "vsiComposite");
-  const friArr = convertSumOfScaleToComposite(Number(localStorage.getItem("friSum")), "friComposite");
-  const wmiArr = convertSumOfScaleToComposite( Number(localStorage.getItem("wmiSum")), "wmiComposite");
-  const psiArr = convertSumOfScaleToComposite(Number(localStorage.getItem("psiSum")), "psiComposite");
-  const fsIqArr = getFsIq(Number(localStorage.getItem("fsIqSum")), "fsIq");
+  const vciArr = convertSumOfScaleToComposite(Number(localStorage.getItem("vciSum")), vciComposite);
+  const vsiArr = convertSumOfScaleToComposite(Number(localStorage.getItem("vsiSum")), vsiComposite);
+  const friArr = convertSumOfScaleToComposite(Number(localStorage.getItem("friSum")), friComposite);
+  const wmiArr = convertSumOfScaleToComposite( Number(localStorage.getItem("wmiSum")), wmiComposite);
+  const psiArr = convertSumOfScaleToComposite(Number(localStorage.getItem("psiSum")), psiComposite);
+  const fsIqArr = getFsIq(Number(localStorage.getItem("fsIqSum")), fsIq);
 
   const submit = async (e:SyntheticEvent) => {
     e.preventDefault();
     try{
       await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
-    //   email,
-    //   password
+        scaledScoreToComposite:{
+          verbalComprehension:{sumOfScale:sumOfVerbalCompScores,compositeScore:vciCompositeScore,percentRank:vciPercentile},
+          visualSpacial:{sumOfScale:sumOfVisualSpacialScores,compositeScore:vsiCompositeScore,percentRank:vsiPercentile},
+          fluidReasoning:{sumOfScale:sumOfFluidReasoningScores,compositeScore:friCompositeScore,percentRank:friPercentile},
+          workingMemory:{sumOfScale:sumOfWorkingMemoryScores,compositeScore:wmiCompositeScore,percentRank:wmiPercentile},
+          processingSpeed:{sumOfScale:sumOfProcessingSpeedScores,compositeScore:psiCompositeScore,percentRank:psiPercentile},
+          fullScale:{sumOfScale:sumOfFullScaleScores,compositeScore:fsiqCompositeScore,percentRank:fsiqPercentile}
+        }
     })
     setRedirect(true)
   } catch(error:any){
@@ -61,27 +67,27 @@ const CompositeAndFullScoreForm = () => {
 const computeComposite = async (e:SyntheticEvent) => {
   e.preventDefault();
   setSumOfVerbalCompScores(String(vciArr[0]))
-  setVciCompositeScore(String(vsiArr[0]))
-  setVciPercentile(String(psiArr[0]))
-  setSumOfVisualSpacialScores(String(wmiArr[0]))
-  setVsiCompositeScore(String(fsIqArr[0]))
-  setVsiPercentile(String(friArr[0]))
-  setSumOfFluidReasoningScores(String(vciArr[0]))
-  setFriCompositeScore(String(vciArr[0]))
-  setFriPercentile(String(vciArr[0]))
-  setSumOfWorkingMemoryScores(String(vciArr[0]))
-  setWmiCompositeScore(String(vciArr[0]))
-  setWmiPercentile(String(vciArr[0]))
-  setSumOfProcessingSpeedScores(String(vciArr[0]))
-  setPsiCompositeScore(String(vciArr[0]))
-  setPsiPercentile(String(vciArr[0]))
-  setSumOfFullScaleScores(String(vciArr[0]))
-  setFsiqCompositeScore(String(vciArr[0]))
-  setFsiqPercentile(String(vciArr[0]))
+  setVciCompositeScore(String(vciArr[1]))
+  setVciPercentile(String(vciArr[2]))
+  setSumOfVisualSpacialScores(String(vsiArr[0]))
+  setVsiCompositeScore(String(vsiArr[1]))
+  setVsiPercentile(String(vsiArr[2]))
+  setSumOfFluidReasoningScores(String(friArr[0]))
+  setFriCompositeScore(String(friArr[1]))
+  setFriPercentile(String(friArr[2]))
+  setSumOfWorkingMemoryScores(String(wmiArr[0]))
+  setWmiCompositeScore(String(wmiArr[1]))
+  setWmiPercentile(String(wmiArr[2]))
+  setSumOfProcessingSpeedScores(String(psiArr[0]))
+  setPsiCompositeScore(String(psiArr[1]))
+  setPsiPercentile(String(psiArr[2]))
+  setSumOfFullScaleScores(String(fsIqArr[0]))
+  setFsiqCompositeScore(String(fsIqArr[1]))
+  setFsiqPercentile(String(fsIqArr[2]))
 }
 
 if(redirect){
-    return <Navigate to="/writtenReport" />
+    return <Navigate to={'/writtenReportPage'} />
   }
 
   return (
