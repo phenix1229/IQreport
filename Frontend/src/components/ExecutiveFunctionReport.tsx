@@ -19,5 +19,6 @@ const ExecutiveFunctionReport = () => {
             strengths for her.
         </p>
     )
-
 }
+
+export default ExecutiveFunctionReport
