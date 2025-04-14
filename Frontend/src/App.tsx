@@ -9,6 +9,7 @@ import NameAndDate from './pages/NameAndDate'
 import ScorePage from './pages/ScorePage'
 import CompositeIqPage from './pages/CompositeIqPage'
 import WrittenReportPage from './pages/WrittenReportPage'
+import ReportTextPage from './pages/ReportTextPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
         <Route path='/nameAndDate' element={<NameAndDate />}/>
         <Route path='/scorePage' element={<ScorePage />}/>
         <Route path='/compositeIqPage' element={<CompositeIqPage />}/>
+        <Route path='/reportTextPage' element={<ReportTextPage />}/>
         <Route path='/writtenReportPage' element={<WrittenReportPage />}/>
       </Route>
   )

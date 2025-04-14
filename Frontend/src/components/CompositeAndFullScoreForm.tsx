@@ -87,7 +87,7 @@ const computeComposite = async (e:SyntheticEvent) => {
 }
 
 if(redirect){
-    return <Navigate to={'/writtenReportPage'} />
+    return <Navigate to={'/reportTextPage'} />
   }
 
   return (

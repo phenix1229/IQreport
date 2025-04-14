@@ -57,6 +57,7 @@ const NameAndDateForm = () => {
       })
       localStorage.setItem('ageMonth',testAgeMonth);
       localStorage.setItem('reportId',newReport.data._id);
+      localStorage.setItem('subjectFirstName',subjectFirstName);
       setRedirect(true);
     } catch(error:any){
       alert(error.message)
