@@ -3,7 +3,6 @@ import Grid from '@mui/material/Grid2';
 const ExecutiveFunctionReport = () => {
 
     const subject = localStorage.getItem('subjectFirstName');
-    const executiveFunctionText = localStorage.getItem('executiveFunctionText');
 
     return (
         <>
