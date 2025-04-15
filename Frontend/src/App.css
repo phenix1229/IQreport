@@ -44,3 +44,14 @@
 p {
   text-align: justify;
 }
+
+label {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+select {
+  margin-top: 10px;
+  margin-left: 10px;
+}

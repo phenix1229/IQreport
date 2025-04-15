@@ -58,6 +58,12 @@ const CompositeAndFullScoreForm = () => {
           fullScale:{sumOfScale:sumOfFullScaleScores,compositeScore:fsiqCompositeScore,percentRank:fsiqPercentile}
         }
     })
+    localStorage.setItem('vci',vciCompositeScore);
+    localStorage.setItem('vsi', vsiCompositeScore);
+    localStorage.setItem('fri',friCompositeScore);
+    localStorage.setItem('wmi',wmiCompositeScore);
+    localStorage.setItem('psi',psiCompositeScore);
+    localStorage.setItem('fsiq',fsiqCompositeScore);
     setRedirect(true)
   } catch(error:any){
     alert(error.response.data.message)

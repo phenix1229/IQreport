@@ -21,6 +21,7 @@ const NameAndDateForm = () => {
   const [testAgeYear, setTestAgeYear] = useState('');
   const [testAgeMonth, setTestAgeMonth] = useState('');
   const [testAgeDay, setTestAgeDay] = useState('');
+  const [gender, setGender] = useState('male');
   
   const submit = async (e:SyntheticEvent) => {
     e.preventDefault();
@@ -58,6 +59,7 @@ const NameAndDateForm = () => {
       localStorage.setItem('ageMonth',testAgeMonth);
       localStorage.setItem('reportId',newReport.data._id);
       localStorage.setItem('subjectFirstName',subjectFirstName);
+      localStorage.setItem('gender',gender);
       setRedirect(true);
     } catch(error:any){
       alert(error.message)
@@ -179,6 +181,11 @@ const NameAndDateForm = () => {
               value={subjectEmail}
               onChange={(Event) => setSubjectEmail(Event.target.value)}
             />
+            <label htmlFor="gender">Gender</label>
+            <select name="gender" id="gender" onChange={(Event) => setGender(Event.target.value)}>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
           </Grid>
           <p>
             Subject age
