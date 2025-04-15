@@ -1,63 +1,10 @@
-const subject = localStorage.getItem('subjectFirstName');
-const gender = localStorage.getItem('gender');
+import { subject, genderRef, scaledRating, compareScales, compositeRating } from "./utilities";
+
 const co = JSON.stringify(localStorage.getItem('coScaledScore'));
 const ss = JSON.stringify(localStorage.getItem('ssScaledScore'));
 const psi = JSON.stringify(localStorage.getItem('psi'));
 
-const genderRef = () => {
-    console.log(gender);
-    if(gender === 'male'){
-        return ['he','him','their'];
-    }
-    return ['she','her','their'];
-}
 
-const scaledRating = (test:number) => {
-    if(test > 0 && test <= 4){
-        return ['Far Below-Average','poorly developed','significant weakness'];
-    }
-    if(test >= 5 && test <= 7){
-        return ['Below-Average','poorly developed','weakness'];
-    }
-    if(test >= 8 && test <= 12){
-        return ['Average','','strength'];
-    }
-    if(test >= 13 && test <= 15){
-        return ['Above-Average','well developed','significant strength'];
-    }
-    return ['Superior','very well developed','significant strength'];
-}
-
-const compareScales = () => {
-    if(Number(co) > Number(ss)){
-        return [scaledRating(Number(co))[1],scaledRating(Number(co))[2]];
-    }
-    return [scaledRating(Number(ss))[1],scaledRating(Number(ss))[2]];
-}
-
-const compositeRating = (score:number) => {
-    if(score >= 0 && score <= 69){
-        return 'Etremely Low';
-    }
-    if(score >= 70 && score <= 79){
-        return 'Very Low';
-    }
-    if(score >= 80 && score <= 89){
-        return 'Low Average';
-    }
-    if(score >= 90 && score <= 109){
-        return 'Average';
-    }
-    if(score >= 110 && score <= 119){
-        return 'High Average';
-    }
-    if(score >= 120 && score <= 129){
-        return 'Very High';
-    }
-    if(score >= 130){
-        return 'Extremely High';
-    }
-}
 
 const intro = () => {
     return `The PSI composite score is comprised of two subtests including Coding and Symbol Search. On the Coding subtest, ${subject} was presented with numbers paired with 
@@ -83,8 +30,8 @@ const higherLower = () => {
 
 const strengthWeakness = () => {
     return `${subject} performed in the ${scaledRating(Number(co))[0]} range on Coding and in the ${scaledRating(Number(ss))[0]} range on the Symbol Search. ${subject} obtained 
-    a composite score in the ${compositeRating(Number(psi))} range on these two subtests indicating that these are ${compareScales()[0]} skills/abilities compared to other 
-    skills/abilities evaluated on the assessment and a ${compareScales()[1]} for ${genderRef()[1]}.`
+    a composite score in the ${compositeRating(Number(psi))} range on these two subtests indicating that these are ${compareScales(Number(co),Number(ss))[0]} skills/abilities compared to other 
+    skills/abilities evaluated on the assessment and a ${compareScales(Number(co),Number(ss))[1]} for ${genderRef()[1]}.`
 }
 
 export {

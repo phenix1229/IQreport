@@ -1,3 +1,25 @@
+const subject = localStorage.getItem('subjectFirstName');
+const gender = localStorage.getItem('gender');
+const vci = localStorage.getItem('vci');
+const vciPercentile = localStorage.getItem('vciPercentile')
+const vsi = localStorage.getItem('vsi');
+const vsiPercentile = localStorage.getItem('vsiPercentile');
+const fri = localStorage.getItem('fri');
+const friPercentile = localStorage.getItem('friPercentile');
+const wmi = localStorage.getItem('wmi');
+const wmiPercentile = localStorage.getItem('wmiPercentile');
+const psi = localStorage.getItem('psi');
+const psiPercentile = localStorage.getItem('psiPercentile');
+const fsiq = localStorage.getItem('fsiq');
+const fsiqPercentile = localStorage.getItem('fsiqPercentile');
+
+const genderRef = () => {
+    if(gender === 'male'){
+        return ['he','him','their'];
+    }
+    return ['she','her','their'];
+}
+
 const computeMonth = (testMonth:number, birthMonth:number, testDay:number, birthDay:number) => {
     if((testDay < birthDay) && (testMonth !== birthMonth)){
         return (11 - (birthMonth - testMonth))
@@ -133,7 +155,57 @@ const getFsIq = (sum:number, arr:any) => {
     return arr[sum -7];
 }
 
+const scaledRating = (test:number) => {
+    if(test > 0 && test <= 4){
+        return ['Far Below-Average','poorly developed','significant weakness'];
+    }
+    if(test >= 5 && test <= 7){
+        return ['Below-Average','poorly developed','weakness'];
+    }
+    if(test >= 8 && test <= 12){
+        return ['Average','','strength'];
+    }
+    if(test >= 13 && test <= 15){
+        return ['Above-Average','well developed','significant strength'];
+    }
+    return ['Superior','very well developed','significant strength'];
+}
+
+const compareScales = (test1:number, test2:number) => {
+    if(test1 > test2){
+        return [scaledRating(Number(test1))[1],scaledRating(Number(test1))[2]];
+    }
+    return [scaledRating(Number(test2))[1],scaledRating(Number(test2))[2]];
+}
+
+const compositeRating = (score:number) => {
+    if(score >= 0 && score <= 69){
+        return 'Extremely Low';
+    }
+    if(score >= 70 && score <= 79){
+        return 'Very Low';
+    }
+    if(score >= 80 && score <= 89){
+        return 'Low Average';
+    }
+    if(score >= 90 && score <= 109){
+        return 'Average';
+    }
+    if(score >= 110 && score <= 119){
+        return 'High Average';
+    }
+    if(score >= 120 && score <= 129){
+        return 'Very High';
+    }
+    if(score >= 130){
+        return 'Extremely High';
+    }
+}
+
 export {
+    subject,
+    gender,
+    genderRef,
     computeDay,
     computeMonth,
     computeYear,
@@ -156,5 +228,20 @@ export {
     psiComposite,
     fsIq,
     convertSumOfScaleToComposite,
-    getFsIq
+    getFsIq,
+    scaledRating,
+    compareScales,
+    compositeRating,
+    vci,
+    vciPercentile,
+    vsi,
+    vsiPercentile,
+    fri,
+    friPercentile,
+    wmi,
+    wmiPercentile,
+    psi,
+    psiPercentile,
+    fsiq,
+    fsiqPercentile
 }

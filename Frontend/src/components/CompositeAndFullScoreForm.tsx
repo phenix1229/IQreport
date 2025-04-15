@@ -59,11 +59,17 @@ const CompositeAndFullScoreForm = () => {
         }
     })
     localStorage.setItem('vci',vciCompositeScore);
+    localStorage.setItem('vciPercentile', vciPercentile)
     localStorage.setItem('vsi', vsiCompositeScore);
+    localStorage.setItem('vsiPercentile',vsiPercentile)
     localStorage.setItem('fri',friCompositeScore);
+    localStorage.setItem('friPercentile',friPercentile);
     localStorage.setItem('wmi',wmiCompositeScore);
+    localStorage.setItem('wmiPercentile',wmiPercentile);
     localStorage.setItem('psi',psiCompositeScore);
+    localStorage.setItem('psiPercentile',psiPercentile);
     localStorage.setItem('fsiq',fsiqCompositeScore);
+    localStorage.setItem('fsiqPercentile',fsiqPercentile);
     setRedirect(true)
   } catch(error:any){
     alert(error.response.data.message)
