@@ -60,6 +60,16 @@ const ScoreForm = () => {
         pictureSpan:{rawScore:psRawScore,scaledScore:psScaledScore},
         symbolSearch:{rawScore:ssRawScore,scaledScore:ssScaledScore},
     })
+    localStorage.setItem("bdScaledScore",bdScaledScore)
+    localStorage.setItem("siScaledScore",siScaledScore)
+    localStorage.setItem("mrScaledScore",mrScaledScore)
+    localStorage.setItem("dsScaledScore",dsScaledScore)
+    localStorage.setItem("coScaledScore",coScaledScore)
+    localStorage.setItem("vcScaledScore",vcScaledScore)
+    localStorage.setItem("fwScaledScore",fwScaledScore)
+    localStorage.setItem("vpScaledScore",vpScaledScore)
+    localStorage.setItem("psScaledScore",psScaledScore)
+    localStorage.setItem("ssScaledScore",ssScaledScore)
     localStorage.setItem("vciSum",String(Number(siScaledScore) + Number(vcScaledScore)))
     localStorage.setItem("vsiSum",String(Number(bdScaledScore) + Number(vpScaledScore)))
     localStorage.setItem("friSum",String(Number(mrScaledScore) + Number(fwScaledScore))) 

@@ -6,7 +6,7 @@ const ExecutiveFunctionReport = () => {
     return (
         <>
             <Grid container size={12} spacing={2}>
-                <p>
+                <p className='text-paragraph'>
                     {`${intro()} ${higherLower()} ${strengthWeakness()}`}  
                 </p>
             </Grid>

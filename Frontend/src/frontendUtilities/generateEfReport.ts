@@ -15,17 +15,18 @@ const intro = () => {
 }
 
 const higherLower = () => {
-    if(co > ss){
+    if(Number(co) > Number(ss)){
         return `Since ${subject} obtained a higher score on Coding than the Symbol Search subtest with scaled scores of ${co} and ${ss} respectively, it indicates
                 that ${subject}’s ability to shift mental operations with ease and speed is better developed than ${genderRef()[2]} visual scanning,
                 visual perceptual skills, and the ability to attend to a rote task.`
     }
-    if(co < ss){
+    if(Number(co) < Number(ss)){
         return `Since ${subject} obtained a higher score on the Symbol Search than the Coding subtest with scaled scores of ${ss} and ${co} respectively, it indicates
                 that ${subject}’s visual scanning, visual perceptual skills, and the ability to attend to a rote task is better developed than ${genderRef()[2]} ability to shift 
                 mental operations with ease and speed.`
     }
-    return '';
+    return `${subject} scored equally (${co}) on both subtests indicating that ${genderRef()[2]} visual scanning, visual perceptual skills, and the ability to attend to a rote task 
+            and ability to shift mental operations with ease and speed are equally developed.`;
 }
 
 const strengthWeakness = () => {
