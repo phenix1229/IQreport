@@ -23,6 +23,7 @@ const Navbar = () => {
 
   const logout = async () => {
     window.sessionStorage.clear()
+    localStorage.clear();
     return <Navigate to="/" />
   }
 
