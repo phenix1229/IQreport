@@ -2,15 +2,38 @@ import Grid from '@mui/material/Grid2';
 import { intro, overView, strengthWeakness } from '../frontendUtilities/generateRaReport';
 import { SyntheticEvent, useState } from 'react';
 import { Button, TextField } from '@mui/material';
+import axios from 'axios';
 
 const ReasoningAbilitiesReport = () => {
 
     const [reportText,setReportText] = useState(`${intro()} ${overView()} ${strengthWeakness()}`);
     const [edit,setEdit] = useState(false);
+    const [confirmed,setConfirmed] = useState(false);
+    
+    const reportId = localStorage.getItem('reportId');
     
     const submit = async (e:SyntheticEvent) => {
         e.preventDefault();
         setEdit(!edit);
+        if(edit === true){
+            setConfirmed(false);
+        }
+    }
+
+    const confirm = async (e:SyntheticEvent) => {
+        e.preventDefault();
+        try{
+            const oldReport = await axios.get(`http://localhost:5000/api/reports/${reportId}`)
+            await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
+                reportDetails:{
+                    reasoningAbilities:reportText,
+                    languageAbilities:oldReport.data.reportDetails.languageAbilities
+                }
+            })
+        } catch(error:any){
+            alert(error.response.data.message)
+        }
+        setConfirmed(true);
     }
 
     return (
@@ -27,16 +50,15 @@ const ReasoningAbilitiesReport = () => {
                     onChange={(Event) => setReportText(Event.target.value)}
                 />
                 }
-                {edit && <Button variant="contained" onClick={(e)=>{submit(e)}}>
-                        Save
-                    </Button>
-                }
                 {!edit && <p className='text-paragraph'>
                     {`${reportText}`}
                 </p>
                 }
-                {!edit && <Button variant="contained" onClick={(e)=>{submit(e)}}>
-                        Edit
+                <Button variant="contained" onClick={(e)=>{submit(e)}}>
+                        {edit ? 'Save' : 'Edit'}
+                </Button>
+                {!edit && <Button variant="contained" onClick={(e)=>{confirm(e)}}>
+                        {confirmed ? 'Confirmed' : 'Confirm'}
                     </Button>
                 }
             </Grid>

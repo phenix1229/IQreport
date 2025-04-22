@@ -2,15 +2,31 @@ import { TextField, Button } from '@mui/material';
 import { useState, SyntheticEvent } from 'react';
 import { intro, higherLower, strengthWeakness } from '../frontendUtilities/generateVaReport';
 import Grid from '@mui/material/Grid2';
+import axios from 'axios';
 
 const VisuospatialAbilitiesReport = () => {
 
     const [reportText,setReportText] = useState(`${intro()} ${higherLower()} ${strengthWeakness()}`);
     const [edit,setEdit] = useState(false);
+    const [confirmed,setConfirmed] = useState(false);
+    
+    const reportId = localStorage.getItem('reportId');
     
     const submit = async (e:SyntheticEvent) => {
         e.preventDefault();
         setEdit(!edit);
+    }
+
+    const confirm = async (e:SyntheticEvent) => {
+        e.preventDefault();
+        try{
+            await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
+                reportDetails:{visuospatialAbilities:reportText}
+            })
+        } catch(error:any){
+            alert(error.response.data.message)
+        }
+        setConfirmed(true);
     }
 
     return (
@@ -27,16 +43,15 @@ const VisuospatialAbilitiesReport = () => {
                     onChange={(Event) => setReportText(Event.target.value)}
                 />
                 }
-                {edit && <Button variant="contained" onClick={(e)=>{submit(e)}}>
-                        Save
-                    </Button>
-                }
                 {!edit && <p className='text-paragraph'>
                     {`${reportText}`}
                 </p>
                 }
-                {!edit && <Button variant="contained" onClick={(e)=>{submit(e)}}>
-                        Edit
+                <Button variant="contained" onClick={(e)=>{submit(e)}}>
+                        {edit ? 'Save' : 'Edit'}
+                </Button>
+                {!edit && <Button variant="contained" onClick={(e)=>{confirm(e)}}>
+                        {confirmed ? 'Confirmed' : 'Confirm'}
                     </Button>
                 }
             </Grid>

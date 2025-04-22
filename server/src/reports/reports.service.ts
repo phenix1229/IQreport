@@ -18,7 +18,7 @@ export class ReportsService {
     return await this.reportModel.find();
   }
 
-  async findOne(id: string) {
+  async findOne(id: string):Promise<Report> {
     const report = await this.reportModel.findById({_id:id});
     if(!report){
       throw new NotFoundException();
@@ -26,7 +26,7 @@ export class ReportsService {
     return report;
   }
 
-  async update(id: string, updateReportDto: UpdateReportDto) {
+  async update(id: string, updateReportDto: UpdateReportDto):Promise<Report> {
     const report = await this.reportModel.findOne({_id:id});
     if(!report){
         throw new NotFoundException('Report does not exist.');

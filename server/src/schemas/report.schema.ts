@@ -58,13 +58,22 @@ export class Report {
 
     @Prop({type:Object, required:true, default: {
         verbalComprehension:{sumOfScale:0,compositeScore:0,percentRank:''},
-        visualSpacial:{sumOfScale:0,compositeScore:0,percentRank:''},
+        visuoSpacial:{sumOfScale:0,compositeScore:0,percentRank:''},
         fluidReasoning:{sumOfScale:0,compositeScore:0,percentRank:''},
         workingMemory:{sumOfScale:0,compositeScore:0,percentRank:''},
         processingSpeed:{sumOfScale:0,compositeScore:0,percentRank:''},
         fullScale:{sumOfScale:0,compositeScore:0,percentRank:''}
     }})
     scaledScoreToComposite: object
+    
+    @Prop({type:Object, required:true, default: {
+        reasoningAbilities:'',
+        languageAbilities:'',
+        visuopacialAbilities:'',
+        memory:'',
+        executiveFunction:''
+    }})
+    reportDetails: object
 }
 
 export const ReportSchema = SchemaFactory.createForClass(Report);

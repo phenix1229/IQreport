@@ -79,4 +79,14 @@ export class CreateReportDto {
         processingSpeed:{sumOfScale:0,compositeScore:0,percentRank:''},
         fullScale:{sumOfScale:0,compositeScore:0,percentRank:''}
     }
+    
+    @IsNotEmpty()
+    @IsObject()
+    reportDetails: object = {
+        reasoningAbilities:'',
+        languageAbilities:'',
+        visuospacialAbilities:'',
+        memory:'',
+        executiveFuntion:''
+    }
 }
