@@ -4,8 +4,17 @@ import VisuospatialAbilitiesReport from "../components/VisuospatialAbilitiesRepo
 import MemoryReport from "../components/MemoryReport"
 import ExecutiveFunctionReport from "../components/ExecutiveFunctionReport"
 import Grid from '@mui/material/Grid2';
+import { Button } from "@mui/material"
+import { useState } from "react"
+import { Navigate } from "react-router-dom"
 
 const ReportTextPage = () => {
+
+    const [redirect,setRedirect] = useState(false);
+
+    if(redirect){
+        return <Navigate to="/writtenReportPage" />
+    }
 
     return (
         <>
@@ -20,6 +29,9 @@ const ReportTextPage = () => {
                 <VisuospatialAbilitiesReport />
                 <MemoryReport />
                 <ExecutiveFunctionReport />
+                <Button variant="contained" onClick={()=>{setRedirect(true)}}>
+                        Finish
+                </Button>
             </Grid>
         </>
     )

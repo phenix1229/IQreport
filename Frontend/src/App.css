@@ -55,3 +55,28 @@ select {
   margin-top: 10px;
   margin-left: 10px;
 }
+
+td {
+  border: .5px solid black;
+  text-align: left;
+  padding: 10px;
+  
+}
+th {
+  border: .5px solid black;
+  padding: 10px;
+}
+
+table{
+  border: 1px solid black;
+  border-spacing: 0px;
+  
+}
+
+hr {
+  border-top: 2px;
+}
+
+caption {
+  margin-bottom: 15px;
+}

@@ -15,13 +15,23 @@ const MemoryReport = () => {
     const submit = async (e:SyntheticEvent) => {
         e.preventDefault();
         setEdit(!edit);
+        if(edit === true){
+            setConfirmed(false);
+        }
     }
 
     const confirm = async (e:SyntheticEvent) => {
         e.preventDefault();
         try{
+            const oldReport = await axios.get(`http://localhost:5000/api/reports/${reportId}`)
             await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
-                reportDetails:{memory:reportText}
+                reportDetails:{
+                    reasoningAbilities:oldReport.data.reportDetails.reasoningAbilities,
+                    languageAbilities:oldReport.data.reportDetails.languageAbilities,
+                    visuospatialAbilities:oldReport.data.reportDetails.visuospatialAbilities,
+                    memory:reportText,
+                    executiveFunction:oldReport.data.reportDetails.executiveFunction
+                }
             })
         } catch(error:any){
             alert(error.response.data.message)

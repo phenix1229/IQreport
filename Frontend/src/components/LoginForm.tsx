@@ -18,13 +18,13 @@ const LoginForm = () => {
     }, {withCredentials:true})
     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
     setRedirect(true)
-  } catch(error:any){
-    alert(error.response.data.message)
+    } catch(error:any){
+      alert(error.response.data.message)
+    }
   }
-}
 
-if(redirect){
-    return <Navigate to="/userHome" />
+  if(redirect){
+      return <Navigate to="/userHome" />
   }
 
   return (

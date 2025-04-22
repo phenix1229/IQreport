@@ -69,7 +69,7 @@ export class Report {
     @Prop({type:Object, required:true, default: {
         reasoningAbilities:'',
         languageAbilities:'',
-        visuopacialAbilities:'',
+        visuospacialAbilities:'',
         memory:'',
         executiveFunction:''
     }})

@@ -73,7 +73,7 @@ export class CreateReportDto {
     @IsObject()
     scaledScoreToComposite: object = {
         verbalComprehension:{sumOfScale:0,compositeScore:0,percentRank:''},
-        visualSpacial:{sumOfScale:0,compositeScore:0,percentRank:''},
+        visuoSpacial:{sumOfScale:0,compositeScore:0,percentRank:''},
         fluidReasoning:{sumOfScale:0,compositeScore:0,percentRank:''},
         workingMemory:{sumOfScale:0,compositeScore:0,percentRank:''},
         processingSpeed:{sumOfScale:0,compositeScore:0,percentRank:''},

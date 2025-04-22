@@ -15,14 +15,24 @@ const LanguageAbilitiesReport = () => {
     const submit = async (e:SyntheticEvent) => {
         e.preventDefault();
         setEdit(!edit);
+        if(edit === true){
+            setConfirmed(false);
+        }
     }
 
     const confirm = async (e:SyntheticEvent) => {
         e.preventDefault();
         try{
+            const oldReport = await axios.get(`http://localhost:5000/api/reports/${reportId}`)
             await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
-                reportDetails:{languageAbilities:reportText}
-          })
+                reportDetails:{
+                    reasoningAbilities:oldReport.data.reportDetails.reasoningAbilities,
+                    languageAbilities:reportText,
+                    visuospatialAbilities:oldReport.data.reportDetails.visuospatialAbilities,
+                    memory:oldReport.data.reportDetails.memory,
+                    executiveFunction:oldReport.data.reportDetails.executiveFunction
+                }
+            })
         } catch(error:any){
             alert(error.response.data.message)
         }
