@@ -23,6 +23,7 @@ const ReportTextPage = () => {
             <hr />
             <h3>Cognitive Assessment Results</h3>
             <hr />
+            <p><strong><mark>Please review all results and edit if needed before confirming.</mark></strong></p>
             <Grid container size={12} spacing={2}>
                 <ReasoningAbilitiesReport />
                 <LanguageAbilitiesReport />

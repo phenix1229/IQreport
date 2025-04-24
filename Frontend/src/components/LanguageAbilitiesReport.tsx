@@ -24,15 +24,23 @@ const LanguageAbilitiesReport = () => {
         e.preventDefault();
         try{
             const oldReport = await axios.get(`http://localhost:5000/api/reports/${reportId}`)
-            await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
-                reportDetails:{
-                    reasoningAbilities:oldReport.data.reportDetails.reasoningAbilities,
-                    languageAbilities:reportText,
-                    visuospatialAbilities:oldReport.data.reportDetails.visuospatialAbilities,
-                    memory:oldReport.data.reportDetails.memory,
-                    executiveFunction:oldReport.data.reportDetails.executiveFunction
-                }
-            })
+            if(!oldReport.data.reportDetails){
+                await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
+                    reportDetails:{
+                        languageAbilities:reportText
+                    }
+                })
+            } else {
+                await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
+                    reportDetails:{
+                        reasoningAbilities:oldReport.data.reportDetails.reasoningAbilities,
+                        languageAbilities:reportText,
+                        visuospatialAbilities:oldReport.data.reportDetails.visuospatialAbilities,
+                        memory:oldReport.data.reportDetails.memory,
+                        executiveFunction:oldReport.data.reportDetails.executiveFunction
+                    }
+                })
+            }
         } catch(error:any){
             alert(error.response.data.message)
         }
@@ -60,7 +68,7 @@ const LanguageAbilitiesReport = () => {
                 <Button variant="contained" onClick={(e)=>{submit(e)}}>
                         {edit ? 'Save' : 'Edit'}
                 </Button>
-                {!edit && <Button variant="contained" onClick={(e)=>{confirm(e)}}>
+                {!edit && <Button variant="contained" color={!confirmed ? 'error' : 'primary'} onClick={(e)=>{confirm(e)}}>
                         {confirmed ? 'Confirmed' : 'Confirm'}
                     </Button>
                 }

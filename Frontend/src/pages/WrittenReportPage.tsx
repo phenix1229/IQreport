@@ -1,21 +1,42 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../app/store'
+import { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
+import '../interceptors/axios'
 import Grid from '@mui/material/Grid2';
 import { Button } from "@mui/material"
-import { useState } from "react"
-import { Navigate } from "react-router-dom"
+// import { Navigate } from "react-router-dom"
 import { compositeRating, scaledRating } from '../frontendUtilities/utilities';
-// import axios from 'axios';
-import {data} from "./blah";
-
-// const reportId = localStorage.getItem('reportId');
-// const {data} = await axios.get(`http://localhost:5000/api/reports/${reportId}`);
+import axios from 'axios'
+// import { setSubjects } from '../app/subjectsSlice'
+import { setReport } from '../app/reportSlice'
 
 const WrittenReportPage = () => {
+    let report:any = useSelector((state:RootState) => state.report.report)
+    const [redirect,setRedirect] = useState(false);
+    const dispatch = useDispatch();
+    const reportId = localStorage.getItem('reportNuber')
 
-  const [redirect,setRedirect] = useState(false);
+    if(redirect){
+        return <Navigate to="/userHome" />
+    }
 
-  if(redirect){
-    return <Navigate to="/userHome" />
-  }
+    useEffect(() => {
+      (async ()=> { 
+        try{
+          await axios.get(`http://localhost:5000/api/reports/${reportId}`)
+        .then((response:any) => {
+          const stringData:any = JSON.stringify(response.data)
+        //   const editData =stringData.replaceAll("_id","id")
+          dispatch(setReport(JSON.parse(stringData)))
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+        } catch(error){}
+      }
+      )();
+      }, []);
 
   return (
     <>
@@ -28,11 +49,11 @@ const WrittenReportPage = () => {
         <Grid size={12}>
           <br />
           <p className='text-paragraph'>
-          Date of Evaluation: {`${data.testDate}`}
+          Date of Evaluation: {`${report.testDate}`}
           <br />
-          Subject Name: {`${data.subjectFirstName} ${data.subjectLastName}`}
+          Subject Name: {`${report.subjectFirstName} ${report.subjectLastName}`}
           <br />
-          DOB: {`${data.birthDate}`}
+          DOB: {`${report.birthDate}`}
           </p>
           <br />
           </Grid>
@@ -45,27 +66,27 @@ const WrittenReportPage = () => {
           <br />
           <h4>Reasoning Abilities</h4>
           <p className='text-paragraph'>
-            {`${data.reportDetails.reasoningAbilities}`}
+            {`${report.reportDetails.reasoningAbilities}`}
           </p>
           <br />
           <h4>Language Abilities</h4>
           <p className='text-paragraph'>
-            {`${data.reportDetails.languageAbilities}`}
+            {`${report.reportDetails.languageAbilities}`}
           </p>
           <br />
           <h4>Visuospatial Abilities</h4>
           <p className='text-paragraph'>
-            {`${data.reportDetails.visuospatialAbilities}`}
+            {`${report.reportDetails.visuospatialAbilities}`}
           </p>
           <br />
           <h4>Memory</h4>
           <p className='text-paragraph'>
-            {`${data.reportDetails.memory}`}
+            {`${report.reportDetails.memory}`}
           </p>
           <br />
           <h4>Executive Function</h4>
           <p className='text-paragraph'>
-            {`${data.reportDetails.executiveFunction}`}
+            {`${report.reportDetails.executiveFunction}`}
           </p>
           <br />
           <hr />
@@ -77,117 +98,125 @@ const WrittenReportPage = () => {
           <br />
           <table>
           <caption>WISC-V IQ/Composite Scores</caption>
+          <thead>
             <tr>
               <th>Composite</th>
               <th>IQ/Composite Scores</th>
               <th>Percentile</th>
               <th>Qualitative Description/Range</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>Full Scale IQ</td>
-              <td>{`${data.scaledScoreToComposite.fullScale.compositeScore}`}</td>
-              <td>{`${data.scaledScoreToComposite.fullScale.percentRank}`}</td>
-              <td>{`${compositeRating(Number(data.scaledScoreToComposite.fullScale.compositeScore))}`}</td>
+              <td>{`${report.scaledScoreToComposite.fullScale.compositeScore}`}</td>
+              <td>{`${report.scaledScoreToComposite.fullScale.percentRank}`}</td>
+              <td>{`${compositeRating(Number(report.scaledScoreToComposite.fullScale.compositeScore))}`}</td>
             </tr>
             <tr>
               <td>Verbal Comprehension</td>
-              <td>{`${data.scaledScoreToComposite.verbalComprehension.compositeScore}`}</td>
-              <td>{`${data.scaledScoreToComposite.verbalComprehension.percentRank}`}</td>
-              <td>{`${compositeRating(Number(data.scaledScoreToComposite.verbalComprehension.compositeScore))}`}</td>
+              <td>{`${report.scaledScoreToComposite.verbalComprehension.compositeScore}`}</td>
+              <td>{`${report.scaledScoreToComposite.verbalComprehension.percentRank}`}</td>
+              <td>{`${compositeRating(Number(report.scaledScoreToComposite.verbalComprehension.compositeScore))}`}</td>
             </tr>
             <tr>
               <td>Fluid Reasoning</td>
-              <td>{`${data.scaledScoreToComposite.fluidReasoning.compositeScore}`}</td>
-              <td>{`${data.scaledScoreToComposite.fluidReasoning.percentRank}`}</td>
-              <td>{`${compositeRating(Number(data.scaledScoreToComposite.fluidReasoning.compositeScore))}`}</td>
+              <td>{`${report.scaledScoreToComposite.fluidReasoning.compositeScore}`}</td>
+              <td>{`${report.scaledScoreToComposite.fluidReasoning.percentRank}`}</td>
+              <td>{`${compositeRating(Number(report.scaledScoreToComposite.fluidReasoning.compositeScore))}`}</td>
             </tr>
             <tr>
               <td>Visual-Spatial</td>
-              <td>{`${data.scaledScoreToComposite.visualSpacial.compositeScore}`}</td>
-              <td>{`${data.scaledScoreToComposite.visualSpacial.percentRank}`}</td>
-              <td>{`${compositeRating(Number(data.scaledScoreToComposite.visualSpacial.compositeScore))}`}</td>
+              <td>{`${report.scaledScoreToComposite.visuoSpacial.compositeScore}`}</td>
+              <td>{`${report.scaledScoreToComposite.visuoSpacial.percentRank}`}</td>
+              <td>{`${compositeRating(Number(report.scaledScoreToComposite.visuoSpacial.compositeScore))}`}</td>
             </tr>
             <tr>
               <td>Working Memory</td>
-              <td>{`${data.scaledScoreToComposite.workingMemory.compositeScore}`}</td>
-              <td>{`${data.scaledScoreToComposite.workingMemory.percentRank}`}</td>
-              <td>{`${compositeRating(Number(data.scaledScoreToComposite.workingMemory.compositeScore))}`}</td>
+              <td>{`${report.scaledScoreToComposite.workingMemory.compositeScore}`}</td>
+              <td>{`${report.scaledScoreToComposite.workingMemory.percentRank}`}</td>
+              <td>{`${compositeRating(Number(report.scaledScoreToComposite.workingMemory.compositeScore))}`}</td>
             </tr>
             <tr>
               <td>Processing Speed</td>
-              <td>{`${data.scaledScoreToComposite.processingSpeed.compositeScore}`}</td>
-              <td>{`${data.scaledScoreToComposite.processingSpeed.percentRank}`}</td>
-              <td>{`${compositeRating(Number(data.scaledScoreToComposite.processingSpeed.compositeScore))}`}</td>
+              <td>{`${report.scaledScoreToComposite.processingSpeed.compositeScore}`}</td>
+              <td>{`${report.scaledScoreToComposite.processingSpeed.percentRank}`}</td>
+              <td>{`${compositeRating(Number(report.scaledScoreToComposite.processingSpeed.compositeScore))}`}</td>
             </tr>
+          </tbody>
           </table>
           <br />
           <br />
           <br />
           <br />
-          <table id='scaledScoreTable'>
+          <table>
             <caption>WISC-V Subtest Scaled Scores</caption>
-            <tr>
-              <th>Subtests</th>
-              <th>Scaled Scores</th>
-              <th>Qualitative Description/Range</th>
-            </tr>
-            <tr>
-              <td>Vocabulary</td>
-              <td>{`${data.vocabulary.scaledScore}`}</td>
-              <td>{`${scaledRating(Number(data.vocabulary.scaledScore))}`}</td>
-            </tr>
-            <tr>
-              <td>Similarities</td>
-              <td>{`${data.similarities.scaledScore}`}</td>
-              <td>{`${scaledRating(Number(data.similarities.scaledScore))}`}</td>
-            </tr>
-            <tr>
-              <td>Matrix Reasoning</td>
-              <td>{`${data.matrixReasoning.scaledScore}`}</td>
-              <td>{`${scaledRating(Number(data.matrixReasoning.scaledScore))}`}</td>
-            </tr>
-            <tr>
-              <td>Figure Weights</td>
-              <td>{`${data.figureWeights.scaledScore}`}</td>
-              <td>{`${scaledRating(Number(data.figureWeights.scaledScore))}`}</td>
-            </tr>
-            <tr>
-              <td>Block Design</td>
-              <td>{`${data.blockDesign.scaledScore}`}</td>
-              <td>{`${scaledRating(Number(data.blockDesign.scaledScore))}`}</td>
-            </tr>
-            <tr>
-              <td>Visual Puzzles</td>
-              <td>{`${data.visualPuzzles.scaledScore}`}</td>
-              <td>{`${scaledRating(Number(data.visualPuzzles.scaledScore))}`}</td>
-            </tr>
-            <tr>
-              <td>Digit Span</td>
-              <td>{`${data.digitSpan.scaledScore}`}</td>
-              <td>{`${scaledRating(Number(data.digitSpan.scaledScore))}`}</td>
-            </tr>
-            <tr>
-              <td>Picture Span</td>
-              <td>{`${data.pictureSpan.scaledScore}`}</td>
-              <td>{`${scaledRating(Number(data.pictureSpan.scaledScore))}`}</td>
-            </tr>
-            <tr>
-              <td>Coding</td>
-              <td>{`${data.coding.scaledScore}`}</td>
-              <td>{`${scaledRating(Number(data.coding.scaledScore))}`}</td>
-            </tr>
-            <tr>
-              <td>Symbol Search</td>
-              <td>{`${data.symbolSearch.scaledScore}`}</td>
-              <td>{`${scaledRating(Number(data.symbolSearch.scaledScore))}`}</td>
-            </tr>
+            <thead>
+              <tr>
+                <th>Subtests</th>
+                <th>Scaled Scores</th>
+                <th>Qualitative Description/Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Vocabulary</td>
+                <td>{`${report.vocabulary.scaledScore}`}</td>
+                <td>{`${scaledRating(Number(report.vocabulary.scaledScore))[0]}`}</td>
+              </tr>
+              <tr>
+                <td>Similarities</td>
+                <td>{`${report.similarities.scaledScore}`}</td>
+                <td>{`${scaledRating(Number(report.similarities.scaledScore))[0]}`}</td>
+              </tr>
+              <tr>
+                <td>Matrix Reasoning</td>
+                <td>{`${report.matrixReasoning.scaledScore}`}</td>
+                <td>{`${scaledRating(Number(report.matrixReasoning.scaledScore))[0]}`}</td>
+              </tr>
+              <tr>
+                <td>Figure Weights</td>
+                <td>{`${report.figureWeights.scaledScore}`}</td>
+                <td>{`${scaledRating(Number(report.figureWeights.scaledScore))[0]}`}</td>
+              </tr>
+              <tr>
+                <td>Block Design</td>
+                <td>{`${report.blockDesign.scaledScore}`}</td>
+                <td>{`${scaledRating(Number(report.blockDesign.scaledScore))[0]}`}</td>
+              </tr>
+              <tr>
+                <td>Visual Puzzles</td>
+                <td>{`${report.visualPuzzles.scaledScore}`}</td>
+                <td>{`${scaledRating(Number(report.visualPuzzles.scaledScore))[0]}`}</td>
+              </tr>
+              <tr>
+                <td>Digit Span</td>
+                <td>{`${report.digitSpan.scaledScore}`}</td>
+                <td>{`${scaledRating(Number(report.digitSpan.scaledScore))[0]}`}</td>
+              </tr>
+              <tr>
+                <td>Picture Span</td>
+                <td>{`${report.pictureSpan.scaledScore}`}</td>
+                <td>{`${scaledRating(Number(report.pictureSpan.scaledScore))[0]}`}</td>
+              </tr>
+              <tr>
+                <td>Coding</td>
+                <td>{`${report.coding.scaledScore}`}</td>
+                <td>{`${scaledRating(Number(report.coding.scaledScore))[0]}`}</td>
+              </tr>
+              <tr>
+                <td>Symbol Search</td>
+                <td>{`${report.symbolSearch.scaledScore}`}</td>
+                <td>{`${scaledRating(Number(report.symbolSearch.scaledScore))[0]}`}</td>
+              </tr>
+            </tbody>
           </table>
           <br />
           <br />
           <p className='text-paragraph'>
-            Evaluator's Name: {`${data.psychologistFirstName} ${data.psychologistLastName}`}
+            Evaluator's Name: {`${report.psychologistFirstName} ${report.psychologistLastName}`}
             <br />
-            Date of Report: {`${data.testDate}`}
+            Date of Report: {`${report.testDate}`}
           </p>
         </Grid>
         <br />

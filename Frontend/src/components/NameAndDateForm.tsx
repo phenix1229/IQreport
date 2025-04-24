@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid2'
 import { computeDay, computeMonth, computeYear } from '../frontendUtilities/utilities'
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import { grey, red } from '@mui/material/colors';
 
 const NameAndDateForm = () => {
   const [redirect, setRedirect] = useState(false);
@@ -22,23 +23,29 @@ const NameAndDateForm = () => {
   const [testAgeMonth, setTestAgeMonth] = useState('');
   const [testAgeDay, setTestAgeDay] = useState('');
   const [gender, setGender] = useState('male');
+  const [ageComputed,setAgeComputed] = useState(false);
   
   const submit = async (e:SyntheticEvent) => {
     e.preventDefault();
+    if(psychologistFirstName === '' ||
+      psychologistLastName === '' ||
+      subjectFirstName === '' ||
+      subjectLastName === '' ||
+      testDateMonth === '' || testDateDay === '' || testDateYear === '' ||
+      birthdateMonth === '' || birthDateDay === '' || birthDateYear === '' ||
+      testAgeYear === '' || testAgeMonth === '' || testAgeDay === '' ||
+      ageComputed === false
+    ){
+      alert("Please complete all fields and compute age.");
+    }
     try{
       const newReport = await axios.post('http://localhost:5000/api/reports', {
         psychologistFirstName,
         psychologistLastName,
         subjectFirstName,
         subjectLastName,
-        testDate:[
-        Number(testDateYear),
-        Number(testDateMonth),
-        Number(testDateDay)],
-        birthDate:[
-        Number(birthDateYear),
-        Number(birthdateMonth),
-        Number(birthDateDay)],
+        testDate:`${testDateMonth}/${testDateDay}/${testDateYear}`,
+        birthDate:`${birthdateMonth}/${birthDateDay}/${birthDateYear}`,
         testAge:[
         Number(testAgeYear),
         Number(testAgeMonth),
@@ -71,6 +78,7 @@ const NameAndDateForm = () => {
     setTestAgeMonth(String(computeMonth(Number(testDateMonth),Number(birthdateMonth),Number(testDateDay),Number(birthDateDay))));
     setTestAgeDay(String(computeDay(Number(testDateDay),Number(birthDateDay),Number(testDateYear),Number(testDateMonth))));
     setTestAgeYear(String(computeYear(Number(testDateMonth),Number(birthdateMonth),Number(testDateYear),Number(birthDateYear),Number(testDateDay),Number(birthDateDay))));
+    setAgeComputed(true);
   }
 
   if(redirect){
@@ -87,6 +95,7 @@ const NameAndDateForm = () => {
           <Grid textAlign={'left'}>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:testDateMonth === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='testDateMonth'
               label="Test month"
@@ -95,6 +104,7 @@ const NameAndDateForm = () => {
             />
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:testDateDay === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='testDateDay'
               label="Test day"
@@ -103,6 +113,7 @@ const NameAndDateForm = () => {
             />
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:testDateYear === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='testDateYear'
               label="Test year"
@@ -113,6 +124,7 @@ const NameAndDateForm = () => {
           <Grid textAlign={'left'}>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:psychologistFirstName === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='psychologistFirstName'
               label="Psychologist first name"
@@ -121,6 +133,7 @@ const NameAndDateForm = () => {
             />
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:psychologistLastName === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='psychologistLastName'
               label="Psychologist last name"
@@ -131,6 +144,7 @@ const NameAndDateForm = () => {
           <Grid textAlign={'left'}>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:subjectFirstName === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='subjectFirstName'
               label="Subject first name"
@@ -139,6 +153,7 @@ const NameAndDateForm = () => {
             />
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:subjectLastName === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='subjectLastName'
               label="Subject last name"
@@ -149,6 +164,7 @@ const NameAndDateForm = () => {
           <Grid textAlign={'left'}>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:birthdateMonth === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='birthdateMonth'
               label="Birth month"
@@ -157,6 +173,7 @@ const NameAndDateForm = () => {
             />
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:birthDateDay === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='birthDateDay'
               label="Birth day"
@@ -165,6 +182,7 @@ const NameAndDateForm = () => {
             />
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:birthDateYear === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='birthDateYear'
               label="Birth year"
@@ -175,6 +193,7 @@ const NameAndDateForm = () => {
           <Grid textAlign={'left'}>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:subjectEmail === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='subjectEmail'
               label="Subject email"
@@ -190,7 +209,7 @@ const NameAndDateForm = () => {
           <p>
             Subject age
           </p>
-          <Button variant="contained" onClick={(e)=>{computeAge(e)}}>Compute age</Button>
+          <Button variant="contained" color={!ageComputed ? 'error' : 'primary'} onClick={(e)=>{computeAge(e)}}>Compute age</Button>
           <Grid textAlign={'left'}>
             <TextField
               required

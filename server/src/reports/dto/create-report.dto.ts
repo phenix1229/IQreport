@@ -1,92 +1,85 @@
-import { IsNotEmpty, IsString, IsObject, IsArray } from "class-validator"
+import { IsNotEmpty, IsString, IsObject, IsArray, IsOptional } from "class-validator"
 
 export class CreateReportDto {
-   @IsNotEmpty()
-   @IsString()
+    @IsString()
     subjectFirstName: string
    
-    @IsNotEmpty()
-   @IsString()
+    @IsString()
     subjectLastName: string
    
-    @IsNotEmpty()
     @IsString()
     psychologistFirstName: string
     
-    @IsNotEmpty()
     @IsString()
     psychologistLastName: string
 
-    @IsNotEmpty()
-    @IsArray()
-    testDate: [number]
+    @IsString()
+    testDate: string
 
-    @IsNotEmpty()
-    @IsArray()
-    birthDate: [number]
+    @IsString()
+    birthDate: string
 
-    @IsNotEmpty()
     @IsArray()
     testAge: [number]
 
-    @IsNotEmpty()
     @IsObject()
-    blockDesign: object = {rawScore:0,scaledScore:0}
+    @IsOptional()
+    blockDesign: {rawScore:Number,scaledScore:Number}
 
-    @IsNotEmpty()
     @IsObject()
-    similarities: object = {rawScore:0,scaledScore:0}
+    @IsOptional()
+    similarities: {rawScore:Number,scaledScore:Number}
 
-    @IsNotEmpty()
     @IsObject()
-    matrixReasoning: object = {rawScore:0,scaledScore:0}
+    @IsOptional()
+    matrixReasoning: {rawScore:Number,scaledScore:Number}
 
-    @IsNotEmpty()
     @IsObject()
-    digitSpan: object = {rawScore:0,scaledScore:0}
+    @IsOptional()
+    digitSpan: {rawScore:Number,scaledScore:Number}
 
-    @IsNotEmpty()
     @IsObject()
-    coding: object = {rawScore:0,scaledScore:0}
+    @IsOptional()
+    coding: {rawScore:Number,scaledScore:Number}
 
-    @IsNotEmpty()
     @IsObject()
-    vocabulary: object = {rawScore:0,scaledScore:0}
+    @IsOptional()
+    vocabulary: {rawScore:Number,scaledScore:Number}
 
-    @IsNotEmpty()
     @IsObject()
-    figureWeights: object = {rawScore:0,scaledScore:0}
+    @IsOptional()
+    figureWeights: {rawScore:Number,scaledScore:Number}
 
-    @IsNotEmpty()
     @IsObject()
-    visualPuzzles: object = {rawScore:0,scaledScore:0}
+    @IsOptional()
+    visualPuzzles: {rawScore:Number,scaledScore:Number}
 
-    @IsNotEmpty()
     @IsObject()
-    pictureSpan: object = {rawScore:0,scaledScore:0}
+    @IsOptional()
+    pictureSpan: {rawScore:Number,scaledScore:Number}
 
-    @IsNotEmpty()
     @IsObject()
-    symbolSearch: object = {rawScore:0,scaledScore:0}
+    @IsOptional()
+    symbolSearch: {rawScore:Number,scaledScore:Number}
 
-    @IsNotEmpty()
     @IsObject()
-    scaledScoreToComposite: object = {
-        verbalComprehension:{sumOfScale:0,compositeScore:0,percentRank:''},
-        visuoSpacial:{sumOfScale:0,compositeScore:0,percentRank:''},
-        fluidReasoning:{sumOfScale:0,compositeScore:0,percentRank:''},
-        workingMemory:{sumOfScale:0,compositeScore:0,percentRank:''},
-        processingSpeed:{sumOfScale:0,compositeScore:0,percentRank:''},
-        fullScale:{sumOfScale:0,compositeScore:0,percentRank:''}
+    @IsOptional()
+    scaledScoreToComposite: {
+        verbalComprehension:{sumOfScale:Number,compositeScore:Number,percentRank:String},
+        visuoSpacial:{sumOfScale:Number,compositeScore:Number,percentRank:String},
+        fluidReasoning:{sumOfScale:Number,compositeScore:Number,percentRank:String},
+        workingMemory:{sumOfScale:Number,compositeScore:Number,percentRank:String},
+        processingSpeed:{sumOfScale:Number,compositeScore:Number,percentRank:String},
+        fullScale:{sumOfScale:Number,compositeScore:Number,percentRank:String}
     }
     
-    @IsNotEmpty()
     @IsObject()
-    reportDetails: object = {
-        reasoningAbilities:'',
-        languageAbilities:'',
-        visuospacialAbilities:'',
-        memory:'',
-        executiveFuntion:''
+    @IsOptional()
+    reportDetails: {
+        reasoningAbilities:String,
+        languageAbilities:String,
+        visuospacialAbilities:String,
+        memory:String,
+        executiveFuntion:String
     }
 }

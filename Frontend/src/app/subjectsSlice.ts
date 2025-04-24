@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export const subjectsSlice = createSlice({
-    name:'subject',
+    name:'subjects',
     initialState,
     reducers:{
         setSubjects: (state, action) => {

@@ -155,17 +155,17 @@ const getFsIq = (sum:number, arr:any) => {
     return arr[sum -7];
 }
 
-const scaledRating = (test:number) => {
-    if(test > 0 && test <= 4){
+const scaledRating = (score:number) => {
+    if(score >= 0 && score <= 4){
         return ['Far Below-Average','poorly developed','significant weakness'];
     }
-    if(test >= 5 && test <= 7){
+    if(score >= 5 && score <= 7){
         return ['Below-Average','poorly developed','weakness'];
     }
-    if(test >= 8 && test <= 12){
+    if(score >= 8 && score <= 12){
         return ['Average','','strength'];
     }
-    if(test >= 13 && test <= 15){
+    if(score >= 13 && score <= 15){
         return ['Above-Average','well developed','significant strength'];
     }
     return ['Superior','very well developed','significant strength'];
@@ -173,9 +173,9 @@ const scaledRating = (test:number) => {
 
 const compareScales = (test1:number, test2:number) => {
     if(test1 > test2){
-        return [scaledRating(Number(test1))[1],scaledRating(Number(test1))[2]];
+        return [scaledRating(test1)[1],scaledRating(test1)[2]];
     }
-    return [scaledRating(Number(test2))[1],scaledRating(Number(test2))[2]];
+    return [scaledRating(test2)[1],scaledRating(test2)[2]];
 }
 
 const compositeRating = (score:number) => {
@@ -200,6 +200,14 @@ const compositeRating = (score:number) => {
     if(score >= 130){
         return 'Extremely High';
     }
+}
+
+const fillRows = (items:any) => {
+    const rows = [];
+    for(let i:number = 0; i < items.length; i++){
+        rows.push({'id':(i + 1),'reportNumber':items[i]});
+    }
+    return rows;
 }
 
 export {
@@ -243,5 +251,6 @@ export {
     psi,
     psiPercentile,
     fsiq,
-    fsiqPercentile
+    fsiqPercentile,
+    fillRows
 }

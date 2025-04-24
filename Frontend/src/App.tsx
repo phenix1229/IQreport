@@ -10,6 +10,8 @@ import ScorePage from './pages/ScorePage'
 import CompositeIqPage from './pages/CompositeIqPage'
 import WrittenReportPage from './pages/WrittenReportPage'
 import ReportTextPage from './pages/ReportTextPage'
+import ViewSubjectsPage from './pages/ViewSubjectsPage'
+import ViewSubject from './pages/ViewSubject'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +25,8 @@ const router = createBrowserRouter(
         <Route path='/compositeIqPage' element={<CompositeIqPage />}/>
         <Route path='/reportTextPage' element={<ReportTextPage />}/>
         <Route path='/writtenReportPage' element={<WrittenReportPage />}/>
+        <Route path='/viewSubjectsPage' element={<ViewSubjectsPage />}/>
+        <Route path='/viewSubject' element={<ViewSubject />}/>
       </Route>
   )
 )

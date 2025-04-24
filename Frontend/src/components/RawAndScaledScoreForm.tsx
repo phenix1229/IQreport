@@ -16,6 +16,7 @@ import {
   convertRawToScale  
 } from '../frontendUtilities/utilities';
 import axios from 'axios';
+import { red, grey } from '@mui/material/colors';
 
 
 const ScoreForm = () => {
@@ -41,12 +42,27 @@ const ScoreForm = () => {
   const [ssRawScore, setSsRawScore] = useState('');
   const [ssScaledScore, setSsScaleScore] = useState('')
   const [redirect, setRedirect] = useState(false);
+  const [scoresComputed,setScoresComputed] = useState(false);
 
   const ageMonth = localStorage.getItem('ageMonth');
   const reportId = localStorage.getItem('reportId');
 
   const submit = async (e:SyntheticEvent) => {
     e.preventDefault();
+    if(bdRawScore === '' ||
+      siRawScore === '' ||
+      mrRawScore === '' ||
+      dsRawScore === '' ||
+      coRawScore === '' || 
+      vcRawScore === '' || 
+      fwRawScore === '' ||
+      vpRawScore === '' || 
+      psRawScore === '' || 
+      ssRawScore === '' ||
+      scoresComputed === false
+    ){
+      alert("Please complete all fields and compute scores.");
+    }
     try{
       await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
         blockDesign:{rawScore:bdRawScore,scaledScore:bdScaledScore},
@@ -94,6 +110,7 @@ const computeScores = (e:SyntheticEvent) => {
   setVpScaledScore(convertRawToScale(vpScale,Number(vpRawScore),Number(ageMonth)))
   setPsScaledScore(convertRawToScale(psScale,Number(psRawScore),Number(ageMonth)))
   setSsScaleScore(convertRawToScale(ssScale,Number(ssRawScore),Number(ageMonth)))
+  setScoresComputed(true)
 }
 
 if(redirect){
@@ -110,6 +127,7 @@ if(redirect){
             <p>Block design</p>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:bdRawScore === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='bdRawScore'
               label="Raw score"
@@ -130,6 +148,7 @@ if(redirect){
             <p>Similarities</p>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:siRawScore === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='siRawScore'
               label="Raw score"
@@ -150,6 +169,7 @@ if(redirect){
             <p>Matrix reasoning</p>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:mrRawScore === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='mrRawScore'
               label="Raw score"
@@ -170,6 +190,7 @@ if(redirect){
             <p>Digit span</p>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:dsRawScore === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='dsRawScore'
               label="Raw score"
@@ -190,6 +211,7 @@ if(redirect){
             <p>Coding</p>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:coRawScore === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='coRawScore'
               label="Raw score"
@@ -212,6 +234,7 @@ if(redirect){
             <p>Vocabulary</p>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:vcRawScore === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='vcRawScore'
               label="Raw score"
@@ -232,6 +255,7 @@ if(redirect){
             <p>Figure weights</p>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:fwRawScore === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='fwRawScore'
               label="Raw score"
@@ -252,6 +276,7 @@ if(redirect){
             <p>Visual puzzles</p>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:vpRawScore === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='vpRawScore'
               label="Raw score"
@@ -272,6 +297,7 @@ if(redirect){
             <p>Picture span</p>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:psRawScore === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='psRawScore'
               label="Raw score"
@@ -292,6 +318,7 @@ if(redirect){
             <p>Symbol search</p>
             <TextField
               required
+              slotProps={{inputLabel:{sx:{color:ssRawScore === '' ? red[500] : grey[900]}}}}
               margin='normal'
               id='ssRawScore'
               label="Raw score"
@@ -310,7 +337,7 @@ if(redirect){
           </Grid>
           </Grid>
           <Grid size={12}>
-            <Button variant="contained" onClick={(e)=>{computeScores(e)}}>Compute scores</Button>
+            <Button variant="contained" color={!scoresComputed ? 'error' : 'primary'} onClick={(e)=>{computeScores(e)}}>Compute scores</Button>
           </Grid>
           <Grid size={12}>
             <Button variant="contained" onClick={(e)=>{submit(e)}}>Submit</Button>

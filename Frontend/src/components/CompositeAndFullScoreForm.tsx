@@ -36,6 +36,7 @@ const CompositeAndFullScoreForm = () => {
   const [fsiqCompositeScore, setFsiqCompositeScore] = useState('');
   const [fsiqPercentile, setFsiqPercentile] = useState('');
   const [redirect, setRedirect] = useState(false);
+  const [valuesComputed,setValuesComputed] = useState(false);
 
   const reportId = localStorage.getItem("reportId");
   const vciArr = convertSumOfScaleToComposite(Number(localStorage.getItem("vciSum")), vciComposite);
@@ -47,6 +48,9 @@ const CompositeAndFullScoreForm = () => {
 
   const submit = async (e:SyntheticEvent) => {
     e.preventDefault();
+    if(!valuesComputed){
+      alert('Please compute values.')
+    }
     try{
       await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
         scaledScoreToComposite:{
@@ -96,6 +100,7 @@ const computeComposite = async (e:SyntheticEvent) => {
   setSumOfFullScaleScores(String(fsIqArr[0]))
   setFsiqCompositeScore(String(fsIqArr[1]))
   setFsiqPercentile(String(fsIqArr[2]))
+  setValuesComputed(true)
 }
 
 if(redirect){
@@ -296,7 +301,7 @@ if(redirect){
       </Grid>
       <br />
       <Grid>
-        <Button variant="contained" onClick={(e)=>{computeComposite(e)}}>Compute values</Button>
+        <Button variant="contained" color={!valuesComputed ? 'error' : 'primary'} onClick={(e)=>{computeComposite(e)}}>Compute values</Button>
       </Grid>
       <br />
       <Grid>

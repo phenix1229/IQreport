@@ -5,75 +5,75 @@ export type ReportDocument = HydratedDocument<Report>;
 
 @Schema()
 export class Report {
-    @Prop({required:true})
+    @Prop()
     subjectFirstName: string
     
-    @Prop({required:true})
+    @Prop()
     subjectLastName: string
 
-    @Prop({required:true})
+    @Prop()
     psychologistFirstName: string
     
-    @Prop({required:true})
+    @Prop()
     psychologistLastName: string
 
-    @Prop({required:true, type:Array})
-    testDate: number[]
+    @Prop()
+    testDate: string
 
-    @Prop({required:true, type:Array})
-    birthDate: number[]
+    @Prop()
+    birthDate: string
 
-    @Prop({required:true, type:Array})
+    @Prop({type:Array})
     testAge: number[]
 
-    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
-    blockDesign: object
+    @Prop({type:Object})
+    blockDesign?: {rawScore:Number,scaledScore:Number}
 
-    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
-    similarities: object
+    @Prop({type:Object})
+    similarities?: {rawScore:Number,scaledScore:Number}
 
-    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
-    matrixReasoning: object
+    @Prop({type:Object})
+    matrixReasoning?: {rawScore:Number,scaledScore:Number}
 
-    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
-    digitSpan: object
+    @Prop({type:Object})
+    digitSpan?: {rawScore:Number,scaledScore:Number}
 
-    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
-    coding: object
+    @Prop({type:Object})
+    coding?: {rawScore:Number,scaledScore:Number}
 
-    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
-    vocabulary: object
+    @Prop({type:Object})
+    vocabulary?: {rawScore:Number,scaledScore:Number}
 
-    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
-    figureWeights: object
+    @Prop({type:Object})
+    figureWeights?: {rawScore:Number,scaledScore:Number}
 
-    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
-    visualPuzzles: object
+    @Prop({type:Object})
+    visualPuzzles?: {rawScore:Number,scaledScore:Number}
 
-    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
-    pictureSpan: object
+    @Prop({type:Object})
+    pictureSpan?: {rawScore:Number,scaledScore:Number}
 
-    @Prop({type:Object, required:true, default: {rawScore:0,scaledScore:0}})
-    symbolSearch: object
+    @Prop({type:Object})
+    symbolSearch?: {rawScore:Number,scaledScore:Number}
 
-    @Prop({type:Object, required:true, default: {
-        verbalComprehension:{sumOfScale:0,compositeScore:0,percentRank:''},
-        visuoSpacial:{sumOfScale:0,compositeScore:0,percentRank:''},
-        fluidReasoning:{sumOfScale:0,compositeScore:0,percentRank:''},
-        workingMemory:{sumOfScale:0,compositeScore:0,percentRank:''},
-        processingSpeed:{sumOfScale:0,compositeScore:0,percentRank:''},
-        fullScale:{sumOfScale:0,compositeScore:0,percentRank:''}
-    }})
-    scaledScoreToComposite: object
+    @Prop({type:Object})
+    scaledScoreToComposite?: {
+        verbalComprehension:{sumOfScale:Number,compositeScore:Number,percentRank:String},
+        visuoSpacial:{sumOfScale:Number,compositeScore:Number,percentRank:String},
+        fluidReasoning:{sumOfScale:Number,compositeScore:Number,percentRank:String},
+        workingMemory:{sumOfScale:Number,compositeScore:Number,percentRank:String},
+        processingSpeed:{sumOfScale:Number,compositeScore:Number,percentRank:String},
+        fullScale:{sumOfScale:Number,compositeScore:Number,percentRank:String}
+    }
     
-    @Prop({type:Object, required:true, default: {
-        reasoningAbilities:'',
-        languageAbilities:'',
-        visuospacialAbilities:'',
-        memory:'',
-        executiveFunction:''
-    }})
-    reportDetails: object
+    @Prop({type:Object})
+    reportDetails?: {
+        reasoningAbilities:String,
+        languageAbilities:String,
+        visuospacialAbilities:String,
+        memory:String,
+        executiveFunction:String
+    }
 }
 
 export const ReportSchema = SchemaFactory.createForClass(Report);
