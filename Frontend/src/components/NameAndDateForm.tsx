@@ -1,15 +1,27 @@
-import { SyntheticEvent, useState } from 'react'
+import { SyntheticEvent, useEffect, useState } from 'react'
 import { Box, Button, TextField } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 import { computeDay, computeMonth, computeYear } from '../frontendUtilities/utilities'
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import { grey, red } from '@mui/material/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../app/store';
+// import { setAuth } from '../app/authSlice';
 
 const NameAndDateForm = () => {
+
+  // const dispatch = useDispatch();
+  
+  // useEffect(()=>{
+  //   if(sessionStorage.user){
+  //     dispatch(setAuth(true))
+  //   }
+  // });
+
+  // const auth:boolean = useSelector((state:RootState) => state.auth.value)
+  
   const [redirect, setRedirect] = useState(false);
-  const [psychologistFirstName, setPsychologistFirstName] = useState('');
-  const [psychologistLastName, setPsychologistLastName] = useState('');
   const [subjectFirstName, setSubjectFirstName] = useState('');
   const [subjectLastName, setSubjectLastName] = useState('');
   const [subjectEmail, setSubjectEmail] = useState('');
@@ -24,13 +36,15 @@ const NameAndDateForm = () => {
   const [testAgeDay, setTestAgeDay] = useState('');
   const [gender, setGender] = useState('male');
   const [ageComputed,setAgeComputed] = useState(false);
-  
+
+  const user:any = useSelector((state:RootState) => state.user.user)
+
   const submit = async (e:SyntheticEvent) => {
     e.preventDefault();
-    if(psychologistFirstName === '' ||
-      psychologistLastName === '' ||
+    if(
       subjectFirstName === '' ||
       subjectLastName === '' ||
+      subjectEmail === '' ||
       testDateMonth === '' || testDateDay === '' || testDateYear === '' ||
       birthdateMonth === '' || birthDateDay === '' || birthDateYear === '' ||
       testAgeYear === '' || testAgeMonth === '' || testAgeDay === '' ||
@@ -40,10 +54,12 @@ const NameAndDateForm = () => {
     }
     try{
       const newReport = await axios.post('http://localhost:5000/api/reports', {
-        psychologistFirstName,
-        psychologistLastName,
+        psychologistFirstName:user.firstName,
+        psychologistLastName:user.lastName,
+        psychologistEmail:user.email,
         subjectFirstName,
         subjectLastName,
+        subjectEmail,
         testDate:`${testDateMonth}/${testDateDay}/${testDateYear}`,
         birthDate:`${birthdateMonth}/${birthDateDay}/${birthDateYear}`,
         testAge:[
@@ -87,11 +103,18 @@ const NameAndDateForm = () => {
     )
   }
 
+  // if(!auth){
+  //   return (
+  //     <h2>Access denied</h2>
+  //   )
+  // }
+
     return (
       <Box sx={{ flexGrow: 1 }}>
         <br />
         <br />
         <Grid>
+          <h3>Please complete all fields and compute age.</h3>
           <Grid textAlign={'left'}>
             <TextField
               required
@@ -123,22 +146,18 @@ const NameAndDateForm = () => {
           </Grid>
           <Grid textAlign={'left'}>
             <TextField
-              required
-              slotProps={{inputLabel:{sx:{color:psychologistFirstName === '' ? red[500] : grey[900]}}}}
+              disabled
               margin='normal'
               id='psychologistFirstName'
               label="Psychologist first name"
-              value={psychologistFirstName}
-              onChange={(Event) => setPsychologistFirstName(Event.target.value)}
+              value={user.firstName}
             />
             <TextField
-              required
-              slotProps={{inputLabel:{sx:{color:psychologistLastName === '' ? red[500] : grey[900]}}}}
+              disabled
               margin='normal'
               id='psychologistLastName'
               label="Psychologist last name"
-              value={psychologistLastName}
-              onChange={(Event) => setPsychologistLastName(Event.target.value)}
+              value={user.lastName}
             />
           </Grid>
           <Grid textAlign={'left'}>

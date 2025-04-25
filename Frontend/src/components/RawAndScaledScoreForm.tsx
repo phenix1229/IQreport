@@ -121,6 +121,7 @@ if(redirect){
     <>
       <br />
       <br />
+        <h3>Please complete all fields and compute scores.</h3>
         <Grid container size={12} spacing={2}>
           <Grid container size={6} justifyContent={'right'}>
           <Grid textAlign={'center'}>

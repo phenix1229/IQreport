@@ -1,14 +1,14 @@
 import { Box, Button, Container } from '@mui/material'
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { RootState } from '../app/store';
+import { RootState } from '../app/store';
 
 const UserOptions = () => {
-//   const user:any = useSelector((state:RootState) => state.user.user)
+  const user:any = useSelector((state:RootState) => state.user.user)
 
   return (
     <Container>
-      <h3>{`Welcome`}</h3> 
+      <h3>{`Welcome ${user.firstName}`}</h3> 
       <br/>
       <br/>
       <br/>
@@ -16,10 +16,10 @@ const UserOptions = () => {
       <Link to='/nameAndDate'>
         <Button variant='contained'>New report</Button>
       </Link>
-      <Link to="/ViewAllTickets">
+      <Link to="/ViewReportsPage">
         <Button variant='contained'>View reports</Button>
       </Link>
-      <Link to="/ViewAllUsers">
+      <Link to="/ViewSubjectsPage">
         <Button variant='contained'>View subjects</Button>
       </Link>
       </Box>

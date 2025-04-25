@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsObject, IsArray, IsOptional } from "class-validator"
+import { IsString, IsObject, IsArray, IsOptional, IsEmail } from "class-validator"
 
 export class CreateReportDto {
     @IsString()
@@ -6,12 +6,18 @@ export class CreateReportDto {
    
     @IsString()
     subjectLastName: string
+    
+    @IsEmail()
+    subjectEmail: string
    
     @IsString()
     psychologistFirstName: string
     
     @IsString()
     psychologistLastName: string
+    
+    @IsEmail()
+    psychologistEmail: string
 
     @IsString()
     testDate: string

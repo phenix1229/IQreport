@@ -2,20 +2,44 @@
 import { Box, Button, Container, FormControl, Grid2, TextField } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../app/store'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import '../interceptors/axios'
 import { DataGrid, GridColDef, GridEventListener } from '@mui/x-data-grid'
-import { fillRows } from '../frontendUtilities/utilities'
+import { setReports } from '../app/reportsSlice'
 import { setReport } from '../app/reportSlice'
-// import UpdateUserForm from '../components/UpdateUserForm'
+import axios from 'axios'
+import { setAuth } from '../app/authSlice'
 
 const ViewSubject = () => {
-  const [editing, setEditing] = useState(false)
+
   const [redirect, setRedirect] = useState('')
   const dispatch = useDispatch();
   const selectedSubject:any = useSelector((state:RootState) => state.selectedSubject.subject)
   let reports:any = useSelector((state:RootState) => state.reports.reports)
+
+  useEffect(() => {
+        (async ()=> { 
+          try{
+            await axios.get(`http://localhost:5000/api/reports/allSubject/${selectedSubject.email}`)
+          .then((response:any) => {
+            const stringData:any = JSON.stringify(response.data)
+            const editData =stringData.replaceAll("_id","id")
+            dispatch(setReports(JSON.parse(editData)))
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+          const dispatch = useDispatch();
+          if(sessionStorage.user){
+            dispatch(setAuth(true))
+          }
+        } catch(error){}
+      }
+    )();
+  }, []);
+
+  const auth:boolean = useSelector((state:RootState) => state.auth.value)
 
   const Item = (label:string, id:string, value:string) => {
     return (
@@ -34,18 +58,18 @@ const ViewSubject = () => {
   const columns: GridColDef<(typeof rows)[number]>[] = [
       { 
         field: 'id', 
-        headerName: 'Number', 
-        width: 100
+        headerName: 'Report ID', 
+        width: 300
       },
       {
-        field: 'reportNumber',
-        headerName: 'Report ID',
-        width: 300
+        field: 'testDate',
+        headerName: 'Report Date',
+        width: 100
       }
   ];
 
   const rowClicked: GridEventListener<'rowClick'> = async (params) => {
-    dispatch(setReport(reports.find((report:any) => report._id === `${params.row.reportNumber}`)))
+    dispatch(setReport(reports.find((report:any) => report.id === `${params.row.id}`)))
     localStorage.setItem('reportNumber',`${params.row.reportNumber}`)
     setRedirect('viewReport')
   };
@@ -54,13 +78,15 @@ const ViewSubject = () => {
   if(redirect === 'back'){
     return (<Navigate to={'/viewSubjectsPage'} />)
   }
-  
-  // if(redirect === 'edit'){
-  //   return (<Navigate to={'/AddComment'} />)
-  // }
 
   if(redirect === 'viewReport'){
     return (<Navigate to={'/writtenReportPage'} />)
+  }
+  
+  if(!auth){
+    return (
+      <h2>Access denied</h2>
+    )
   }
 
   return (
@@ -69,7 +95,7 @@ const ViewSubject = () => {
       <br/>
       <br/>
       <br/>
-      {!editing && <Container sx={{width:'100%'}}>
+      <Container sx={{width:'100%'}}>
       <h2>Subject</h2>
       <Grid2 container rowSpacing={1} columnSpacing={1}>
         <Grid2 size={3}>
@@ -91,7 +117,7 @@ const ViewSubject = () => {
               <br/>
               <br/>
               <DataGrid
-                rows={fillRows(selectedSubject.reports)}
+                rows={reports}
                 columns={columns}
                 onRowClick={rowClicked}
                 initialState={{
@@ -107,16 +133,10 @@ const ViewSubject = () => {
           </Container>
         </Grid2>
       </Grid2>
-        </Container>}
-        {/* {editing === true && (
-            <UpdateUserForm />
-        )} */}
-        {/* <Container>
-            <Button variant='contained' style={{marginBottom:"8px"}} onClick={() => {setEditing(!editing)}}>{editing === false ? 'Edit user' : 'Cancel'}</Button>
-          </Container> */}
-          {editing === false && (<FormControl>
+        </Container>
+          <FormControl>
             <Button variant='contained' onClick={() => {setRedirect('back')}}>Back</Button>
-          </FormControl>)}
+          </FormControl>
 
     </div>
   )

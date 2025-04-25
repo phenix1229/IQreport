@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import authReducer from './authSlice';
+import userReducer from './userSlice';
 import selectedUserReducer from './selectedSubjectSlice';
 import subjectsReducer from './subjectsSlice';
 import subjectReducer from './subjectSlice';
@@ -9,7 +10,8 @@ import reportReducer from './reportSlice';
 
 
 const rootReducer = combineReducers({
-    auth: authReducer,
+    auth:authReducer,
+    user:userReducer,
     selectedUser:selectedUserReducer,
     subjects:subjectsReducer,
     subject:subjectReducer,

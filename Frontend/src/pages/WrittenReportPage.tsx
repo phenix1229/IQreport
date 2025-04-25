@@ -1,42 +1,43 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../app/store'
-import { useEffect, useState } from 'react'
+import { SyntheticEvent, useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import '../interceptors/axios'
 import Grid from '@mui/material/Grid2';
 import { Button } from "@mui/material"
-// import { Navigate } from "react-router-dom"
 import { compositeRating, scaledRating } from '../frontendUtilities/utilities';
-import axios from 'axios'
-// import { setSubjects } from '../app/subjectsSlice'
-import { setReport } from '../app/reportSlice'
+import { setAuth } from '../app/authSlice'
 
 const WrittenReportPage = () => {
-    let report:any = useSelector((state:RootState) => state.report.report)
-    const [redirect,setRedirect] = useState(false);
-    const dispatch = useDispatch();
-    const reportId = localStorage.getItem('reportNuber')
 
-    if(redirect){
-        return <Navigate to="/userHome" />
+  const dispatch = useDispatch();
+      
+  useEffect(()=>{
+    if(sessionStorage.user){
+      dispatch(setAuth(true))
+    }
+  });
+
+  const auth:boolean = useSelector((state:RootState) => state.auth.value)
+  const report:any = useSelector((state:RootState) => state.report.report)
+  const [redirect,setRedirect] = useState(false);
+
+  const close = (e:SyntheticEvent) => {
+    e.preventDefault();
+    localStorage.clear();
+    setRedirect(true);
     }
 
-    useEffect(() => {
-      (async ()=> { 
-        try{
-          await axios.get(`http://localhost:5000/api/reports/${reportId}`)
-        .then((response:any) => {
-          const stringData:any = JSON.stringify(response.data)
-        //   const editData =stringData.replaceAll("_id","id")
-          dispatch(setReport(JSON.parse(stringData)))
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-        } catch(error){}
-      }
-      )();
-      }, []);
+  if(redirect){
+      return <Navigate to="/userHome" />
+  }
+  
+  if(!auth){
+    return (
+      <h2>Access denied</h2>
+    )
+  }
+  
 
   return (
     <>
@@ -222,7 +223,7 @@ const WrittenReportPage = () => {
         <br />
         <br />
         <br />
-        <Button variant="contained" onClick={()=>{setRedirect(true)}}>Close</Button>
+        <Button variant="contained" onClick={(e)=>{close(e)}}>Close</Button>
       </Grid>
     </>
   )

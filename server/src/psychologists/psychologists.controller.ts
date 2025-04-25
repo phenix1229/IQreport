@@ -68,21 +68,25 @@ export class PsychologistsController {
         const refreshToken = await this.jwtService.signAsync({
             firstName: psychologist.firstName,
             lastName: psychologist.lastName,
-            email: psychologist.email
+            email: psychologist.email,
         },{secret:this.configService.get("JWT_ACCESS_TOKEN_SECRET")});
         res.status(200);
         res.cookie('refreshToken', refreshToken,{
             httpOnly: true,
+            sameSite:'none',
             maxAge: 7*24*60*60*1000
         })
-        return {token:accessToken};
+        return {token:accessToken,psychologist:psychologist};
     }
 
     @Get('authUser')
     async authUser(@Req() req:express.Request, @Res() res:express.Response){
+      const accessToken = req.headers.authorization.replace('Bearer ','');
+            const {email} = await this.jwtService.verifyAsync(accessToken);
         try{
             const accessToken = req.headers.authorization.replace('Bearer ','');
             const {email} = await this.jwtService.verifyAsync(accessToken);
+            console.log(`email = ${email}`)
             const psychologist = await this.psychologistsService.findOne(email);
             const authUser = {
                 firstName: psychologist.firstName,

@@ -25,6 +25,14 @@ export class ReportsService {
     }
     return report;
   }
+  
+  async findAllSubject(email: string):Promise<Report[]> {
+    const reports = await this.reportModel.find({subjectEmail:email});
+    if(!reports){
+      throw new NotFoundException();
+    }
+    return reports;
+  }
 
   async update(id: string, updateReportDto: UpdateReportDto):Promise<Report> {
     const report = await this.reportModel.findOne({_id:id});

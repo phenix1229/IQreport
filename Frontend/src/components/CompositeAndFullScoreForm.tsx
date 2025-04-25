@@ -55,7 +55,7 @@ const CompositeAndFullScoreForm = () => {
       await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
         scaledScoreToComposite:{
           verbalComprehension:{sumOfScale:sumOfVerbalCompScores,compositeScore:vciCompositeScore,percentRank:vciPercentile},
-          visualSpacial:{sumOfScale:sumOfVisualSpacialScores,compositeScore:vsiCompositeScore,percentRank:vsiPercentile},
+          visuoSpacial:{sumOfScale:sumOfVisualSpacialScores,compositeScore:vsiCompositeScore,percentRank:vsiPercentile},
           fluidReasoning:{sumOfScale:sumOfFluidReasoningScores,compositeScore:friCompositeScore,percentRank:friPercentile},
           workingMemory:{sumOfScale:sumOfWorkingMemoryScores,compositeScore:wmiCompositeScore,percentRank:wmiPercentile},
           processingSpeed:{sumOfScale:sumOfProcessingSpeedScores,compositeScore:psiCompositeScore,percentRank:psiPercentile},
@@ -111,6 +111,7 @@ if(redirect){
     <>
       <br />
       <br />
+      <h3>Please compute values.</h3>
         <Grid container size={12} spacing={2}>
           <Grid container size={2} justifyContent={'right'}>
             <Grid textAlign={'center'}>

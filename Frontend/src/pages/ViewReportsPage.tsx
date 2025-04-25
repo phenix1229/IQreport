@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuth } from "../app/authSlice";
 import { RootState } from "../app/store";
-import CompositeAndFullScoreForm from "../components/CompositeAndFullScoreForm"
+import ReportsViewer from "../components/ReportsViewer"
 
-const CompositeIqPage = () => {
+const ViewReportsPage = () => {
 
   const dispatch = useDispatch();
     
@@ -21,10 +21,10 @@ const CompositeIqPage = () => {
       <h2>Access denied</h2>
     )
   }
-
+  
   return (
-    <CompositeAndFullScoreForm />
+    <ReportsViewer />
   )
 }
 
-export default CompositeIqPage
+export default ViewReportsPage

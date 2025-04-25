@@ -10,12 +10,18 @@ export class Report {
     
     @Prop()
     subjectLastName: string
+    
+    @Prop()
+    subjectEmail: string
 
     @Prop()
     psychologistFirstName: string
     
     @Prop()
     psychologistLastName: string
+    
+    @Prop()
+    psychologistEmail: string
 
     @Prop()
     testDate: string

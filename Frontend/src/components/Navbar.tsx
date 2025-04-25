@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { AppBar, Button, Toolbar, useScrollTrigger } from '@mui/material'
+import { useSelector } from 'react-redux';
+import { RootState } from '../app/store';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '../app/authSlice';
 
 function ElevationScroll(props: any) {
   const { children, window } = props;
@@ -19,12 +23,22 @@ function ElevationScroll(props: any) {
 
 const Navbar = () => {
 
-    const auth:boolean = false;
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(sessionStorage.user){
+      dispatch(setAuth(true))
+    }
+  });
+
+
+  const auth:boolean = useSelector((state:RootState) => state.auth.value)
 
   const logout = async () => {
-    window.sessionStorage.clear()
+    window.sessionStorage.clear();
     localStorage.clear();
-    return <Navigate to="/" />
+    dispatch(setAuth(false));
+    return <Navigate to="/" />;
   }
 
   return (

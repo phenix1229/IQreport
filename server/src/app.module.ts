@@ -37,7 +37,7 @@ import { SubjectSchema } from './schemas/subject.schema';
     }),
     ReportsModule,
     SubjectsModule,
-    PsychologistsModule
+    // PsychologistsModule
   ],
   controllers: [AppController],
   providers: [
