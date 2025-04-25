@@ -2,7 +2,6 @@
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridEventListener, GridToolbarContainer, GridToolbarFilterButton } from '@mui/x-data-grid';
 import axios from 'axios';
-import '../interceptors/axios'
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,8 +9,6 @@ import { setSubjects } from '../app/subjectsSlice';
 import { setSelectedSubject } from '../app/selectedSubjectSlice';
 import { RootState } from '../app/store';
 import { Container } from '@mui/material';
-
-
 
 const columns: GridColDef<(typeof rows)[number]>[] = [
     { 
@@ -38,8 +35,6 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
         width: 200,
     }
 ];
-
-
 
 const customToolbar = () => {
   return (
@@ -72,17 +67,14 @@ useEffect(() => {
   )();
   }, []);
 
-  
   const rowClicked: GridEventListener<'rowClick'> = async (params) => {
     dispatch(setSelectedSubject(subjects.find((subject:any) => subject.email === `${params.row.email}`)))
     setRedirect(true)
   };
 
-
   if(redirect){
     return <Navigate to="/viewSubject" />
   }
-
   
   return (
     <Container>

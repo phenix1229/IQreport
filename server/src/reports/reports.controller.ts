@@ -28,9 +28,9 @@ export class ReportsController {
     return res.status(HttpStatus.OK).json(report)
   }
   
-  @Get('allSubject/:id')
-  async findAllSubject(@Res() res:express.Response, @Param('id') email: string) {
-    const reports = await this.reportsService.findAllSubject(email);
+  @Get('allSubjectReports/:id')
+  async findAllSubjectReports(@Res() res:express.Response, @Param('id') email: string) {
+    const reports = await this.reportsService.findAllSubjectReports(email);
     if(!reports){
       throw new NotFoundException('Reports do not exist.');
     }

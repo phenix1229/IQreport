@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSubjectDto } from './dto/create-subject.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -27,14 +27,6 @@ export class SubjectsService {
       throw new NotFoundException('Subject does not exist.');
     }
     return subject;
-  }
-
-  async doesExist(email: string) {
-    const subject = await this.subjectModel.findOne({email});
-    if(subject.firstName != ''){
-      return true;
-    }
-    return false;
   }
 
   async update(email: string, updateSubjectDto: UpdateSubjectDto) {

@@ -16,8 +16,4 @@ export class CreatePsychologistDto {
     @IsNotEmpty()
     @IsString()
     password: String
-
-    @IsOptional()
-    @IsArray()
-    reports: String[]
 }

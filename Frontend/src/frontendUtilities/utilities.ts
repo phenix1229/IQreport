@@ -202,14 +202,6 @@ const compositeRating = (score:number) => {
     }
 }
 
-const fillRows = (items:any) => {
-    const rows = [];
-    for(let i:number = 0; i < items.length; i++){
-        rows.push({'id':(i + 1),'reportNumber':items[i]});
-    }
-    return rows;
-}
-
 export {
     subject,
     gender,
@@ -251,6 +243,5 @@ export {
     psi,
     psiPercentile,
     fsiq,
-    fsiqPercentile,
-    fillRows
+    fsiqPercentile
 }

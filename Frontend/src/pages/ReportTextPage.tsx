@@ -61,7 +61,6 @@ const ReportTextPage = () => {
         return <Navigate to="/writtenReportPage" />
     }
 
-    
     if(!auth){
         return (
         <h2>Access denied</h2>

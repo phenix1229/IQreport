@@ -1,4 +1,3 @@
-
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridEventListener, GridToolbarContainer, GridToolbarFilterButton } from '@mui/x-data-grid';
 import axios from 'axios';
@@ -9,8 +8,6 @@ import { setReports } from '../app/reportsSlice';
 import { setReport } from '../app/reportSlice';
 import { RootState } from '../app/store';
 import { Container } from '@mui/material';
-
-
 
 const columns: GridColDef<(typeof rows)[number]>[] = [
   { 
@@ -39,8 +36,6 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
     width: 260,
   }
 ];
-
-
 
 const customToolbar = () => {
   return (
@@ -72,17 +67,14 @@ useEffect(() => {
     })();
 }, []);
 
-  
   const rowClicked: GridEventListener<'rowClick'> = async (params) => {
     dispatch(setReport(reports.find((report:any) => report.id === `${params.row.id}`)))
     setRedirect(true)
   };
 
-
   if(redirect){
     return <Navigate to="/writtenReportPage" />
   }
-
   
   return (
     <Container>

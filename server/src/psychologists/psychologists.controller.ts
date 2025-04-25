@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Res, HttpStatus, NotFoundException, Put, UnauthorizedException, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Res, HttpStatus, NotFoundException, Put, UnauthorizedException, Req, Header } from '@nestjs/common';
 import { PsychologistsService } from './psychologists.service';
 import { CreatePsychologistDto } from './dto/create-psychologist.dto';
 import { UpdatePsychologistDto } from './dto/update-psychologist.dto';
@@ -58,6 +58,8 @@ export class PsychologistsController {
   }
 
   @Post('login')
+  // @Header('content-type', 'text/html')
+  // @Header('Access-Control-Allow-Origin', 'http://localhost:5173/')
     async login(@Res({passthrough: true}) res:express.Response, @Body('email') email:string, @Body('password') password:string){
         const psychologist = await this.psychologistsService.login(email, password);
         const accessToken = await this.jwtService.signAsync({

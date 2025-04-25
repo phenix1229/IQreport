@@ -3,13 +3,13 @@ import { IsString, IsObject, IsArray, IsOptional, IsEmail } from "class-validato
 export class CreateReportDto {
     @IsString()
     subjectFirstName: string
-   
+
     @IsString()
     subjectLastName: string
     
     @IsEmail()
     subjectEmail: string
-   
+
     @IsString()
     psychologistFirstName: string
     

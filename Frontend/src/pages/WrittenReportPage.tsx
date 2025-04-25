@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import { SyntheticEvent, useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
-import '../interceptors/axios'
 import Grid from '@mui/material/Grid2';
 import { Button } from "@mui/material"
 import { compositeRating, scaledRating } from '../frontendUtilities/utilities';
@@ -37,7 +36,6 @@ const WrittenReportPage = () => {
       <h2>Access denied</h2>
     )
   }
-  
 
   return (
     <>

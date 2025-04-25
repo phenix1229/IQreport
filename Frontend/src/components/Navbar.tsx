@@ -49,10 +49,19 @@ const Navbar = () => {
           <Button variant='contained' disableElevation>Home</Button>
         </Link>}
         {!auth && <Link to="/Login">
-        <Button variant='contained' disableElevation>Login</Button>
+          <Button variant='contained' disableElevation>Login</Button>
         </Link>}
         {!auth && <Link to="/Register">
-        <Button variant='contained' disableElevation>Register</Button>
+          <Button variant='contained' disableElevation>Register</Button>
+        </Link>}
+        {auth && <Link to='/nameAndDate'>
+          <Button variant='contained'>New report</Button>
+        </Link>}
+        {auth && <Link to="/ViewReportsPage">
+          <Button variant='contained'>View reports</Button>
+        </Link>}
+        {auth && <Link to="/ViewSubjectsPage">
+          <Button variant='contained'>View subjects</Button>
         </Link>}
         {auth && <Link to="/" onClick={ logout}>
         <Button variant='contained' disableElevation>Logout</Button>

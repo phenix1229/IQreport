@@ -21,7 +21,7 @@ const ViewSubject = () => {
   useEffect(() => {
         (async ()=> { 
           try{
-            await axios.get(`http://localhost:5000/api/reports/allSubject/${selectedSubject.email}`)
+            await axios.get(`http://localhost:5000/api/reports/allSubjectReports/${selectedSubject.email}`)
           .then((response:any) => {
             const stringData:any = JSON.stringify(response.data)
             const editData =stringData.replaceAll("_id","id")
@@ -74,7 +74,6 @@ const ViewSubject = () => {
     setRedirect('viewReport')
   };
 
-
   if(redirect === 'back'){
     return (<Navigate to={'/viewSubjectsPage'} />)
   }
@@ -112,7 +111,6 @@ const ViewSubject = () => {
         </Grid2>
         <Grid2 size={5}>
           <Container>
-
             <Box sx={{ height: 400, width: '100%' }}>
               <br/>
               <br/>
@@ -137,7 +135,6 @@ const ViewSubject = () => {
           <FormControl>
             <Button variant='contained' onClick={() => {setRedirect('back')}}>Back</Button>
           </FormControl>
-
     </div>
   )
 }

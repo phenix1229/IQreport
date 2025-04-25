@@ -25,22 +25,22 @@ const ReasoningAbilitiesReport = () => {
         try{
             const oldReport = await axios.get(`http://localhost:5000/api/reports/${reportId}`)
             if(!oldReport.data.reportDetails){
-                            await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
-                                reportDetails:{
-                                    reasoningAbilities:reportText
-                                }
-                            })
-                        } else {
-                            await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
-                                reportDetails:{
-                                    reasoningAbilities:reportText,
-                                    languageAbilities:oldReport.data.reportDetails.languageAbilities,
-                                    visuospatialAbilities:oldReport.data.reportDetails.visuospatialAbilities,
-                                    memory:oldReport.data.reportDetails.memory,
-                                    executiveFunction:oldReport.data.reportDetails.executiveFunction
-                                }
-                            })
-                        }
+                await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
+                    reportDetails:{
+                        reasoningAbilities:reportText
+                    }
+                })
+            } else {
+                await axios.put(`http://localhost:5000/api/reports/${reportId}`, {
+                    reportDetails:{
+                        reasoningAbilities:reportText,
+                        languageAbilities:oldReport.data.reportDetails.languageAbilities,
+                        visuospatialAbilities:oldReport.data.reportDetails.visuospatialAbilities,
+                        memory:oldReport.data.reportDetails.memory,
+                        executiveFunction:oldReport.data.reportDetails.executiveFunction
+                    }
+                })
+            }
         } catch(error:any){
             alert(error.response.data.message)
         }

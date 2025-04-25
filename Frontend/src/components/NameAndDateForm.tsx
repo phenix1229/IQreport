@@ -1,25 +1,14 @@
-import { SyntheticEvent, useEffect, useState } from 'react'
+import { SyntheticEvent, useState } from 'react'
 import { Box, Button, TextField } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 import { computeDay, computeMonth, computeYear } from '../frontendUtilities/utilities'
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import { grey, red } from '@mui/material/colors';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
-// import { setAuth } from '../app/authSlice';
 
 const NameAndDateForm = () => {
-
-  // const dispatch = useDispatch();
-  
-  // useEffect(()=>{
-  //   if(sessionStorage.user){
-  //     dispatch(setAuth(true))
-  //   }
-  // });
-
-  // const auth:boolean = useSelector((state:RootState) => state.auth.value)
   
   const [redirect, setRedirect] = useState(false);
   const [subjectFirstName, setSubjectFirstName] = useState('');
@@ -102,12 +91,6 @@ const NameAndDateForm = () => {
       <Navigate to={'/scorePage'} />
     )
   }
-
-  // if(!auth){
-  //   return (
-  //     <h2>Access denied</h2>
-  //   )
-  // }
 
     return (
       <Box sx={{ flexGrow: 1 }}>

@@ -23,15 +23,6 @@ export class SubjectsController {
   findOne(@Param('email') email: string) {
     return this.subjectsService.findOne(email);
   }
-  
-  @Get('exists:email')
-  async doesExist(@Res() res:express.Response, @Param('email') email: string) {
-    const subject = await this.subjectsService.findOne(email);
-    // if(!subject){
-    //   throw new NotFoundException('Subject does not exist.');
-    // }
-    return res.status(HttpStatus.OK).json(subject)
-  }
 
   @Put(':email')
   async update(@Res() res:express.Response, @Param('email') email:string, @Body() updateSubjectDto:UpdateSubjectDto){

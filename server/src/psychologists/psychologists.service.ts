@@ -30,7 +30,7 @@ export class PsychologistsService {
     return await this.psychologistModel.find();
   }
 
-  async findOne(email: string):Promise<Psychologist> {
+  async findOne(email: string): Promise<Psychologist> {
     const psychologist = await this.psychologistModel.findOne({email});
     if(!psychologist){
       throw new NotFoundException();
@@ -38,7 +38,7 @@ export class PsychologistsService {
     return psychologist;
   }
 
-  async update(email: string, updatePsychologistDto: UpdatePsychologistDto):Promise<Psychologist> {
+  async update(email: string, updatePsychologistDto: UpdatePsychologistDto): Promise<Psychologist> {
     const psychologist = await this.psychologistModel.findOne({email});
         if(!psychologist){
             throw new NotFoundException('Psychologist does not exist.');
@@ -47,7 +47,7 @@ export class PsychologistsService {
         return psychologist;
   }
 
-  async login(email: string, password: string):Promise<Psychologist>{
+  async login(email: string, password: string): Promise<Psychologist>{
     const psychologist = await this.psychologistModel.findOne({email});
     if(!psychologist || !await bcrypt.compare(password, psychologist.password)){
         throw new BadRequestException('Invalid credentials.')

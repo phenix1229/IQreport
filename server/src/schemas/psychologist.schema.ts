@@ -16,9 +16,6 @@ export class Psychologist {
 
     @Prop({required:true})
     password: String
-
-    @Prop([String])
-    reports?: String[]
 }
 
 export const PsychologistSchema = SchemaFactory.createForClass(Psychologist);
